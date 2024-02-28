@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, IonIcon, IonButton, IonRippleEffect, IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect, IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Data } from './data';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tab1',
@@ -26,6 +26,9 @@ import { CommonModule, NgFor } from '@angular/common';
     IonText,
     IonIcon,
     IonButton,
+    IonButtons,
+    IonBackButton,
+    IonMenuButton,
     IonRippleEffect,
     IonContent,
     IonPopover,
