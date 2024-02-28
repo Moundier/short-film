@@ -8,7 +8,18 @@ This is an angular ionic project
 - `npx ionic serve`
 
 ### Todo
-- `Implement icons of stop play `
-- `Implement icons of mute and dismute`
-- `Implement play on focus`
+- `Implement scroll snap (align and stop)`
+- `Implement foreach mockup data`
+
+- `Implement action play and stop `
+- `Implement action mute and dismute`
+- `Implement action play on focus`
+
 - `Implement pseudo: IF NOT video THEN image`
+
+- `Implement login page`
+- `Implement register page`
+
+- `Implement user session`
+- `Implement cookies instead of localstorage`
+

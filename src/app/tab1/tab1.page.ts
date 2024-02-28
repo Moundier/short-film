@@ -66,7 +66,7 @@ export class Tab1Page {
       comments: 30
     },
     {
-      owner: "Criss",
+      owner: "Chen",
       ownerImage: "jane-smith.jpg",
       domain: "example2.com",
       domainImage: "example2.jpg",
