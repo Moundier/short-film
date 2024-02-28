@@ -9,26 +9,41 @@
 <ion-content [fullscreen]="true">
 
   <ion-grid>
-    <ion-row style="height: 500px;">
-
+    <ion-row>
       <ion-col>
+        <div>
+          <video src="../../assets/adobe-stock-sample.mp4" muted loop autoplay></video>
+        </div>
 
-        <ion-col class="column">Aplicações de Aprendizado de Máquina e Computação Móvel em Soluções Educacionais</ion-col>
+        <ion-row class="header">
+          <ion-icon name="play-sharp"></ion-icon>
 
-          <ion-col class="details">
+          <ion-button size="small">
+            <ion-icon slot="icon-only" name="volume-high"></ion-icon>
+          </ion-button>
+        </ion-row>
+
+        <ion-col class="details">
+          <div class="ion-activatable ripple-parent circle">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-icon name="play-sharp"></ion-icon>
+          </div>
+        </ion-col>
+
+        <ion-row>
+          <ion-col class="footer">
             <ion-chip>
               <ion-avatar>
                 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
               </ion-avatar>
               <ion-label>Chip Avatar</ion-label>
             </ion-chip>
-          </ion-col>
-
-          <ion-col>
+  
             <ion-button size="small" shape="round">
               <ion-label>Subscribe</ion-label>
             </ion-button>
           </ion-col>
+        </ion-row>
 
       </ion-col>
 
@@ -58,10 +73,31 @@
         </div>
         <ion-label>Share</ion-label>
 
-        <div class="ion-activatable ripple-parent circle">
+        <div id="popover_button" class="ion-activatable ripple-parent circle">
           <ion-ripple-effect></ion-ripple-effect>
           <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
         </div>
+        <ion-popover trigger="popover_button" [dismissOnSelect]="true">
+          <ng-template>
+            <ion-content>
+              <ion-list>
+                <ion-item [button]="true" [detail]="false">Option 1</ion-item>
+                <ion-item [button]="true" [detail]="false">Option 2</ion-item>
+                <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
+        
+                <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+                  <ng-template>
+                    <ion-content>
+                      <ion-list>
+                        <ion-item [button]="true" [detail]="false">Nested option</ion-item>
+                      </ion-list>
+                    </ion-content>
+                  </ng-template>
+                </ion-popover>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
 
         <div class="ion-activatable ripple-parent rounded-rectangle">
           <ion-ripple-effect></ion-ripple-effect>
