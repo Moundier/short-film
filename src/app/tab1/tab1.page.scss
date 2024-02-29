@@ -3,11 +3,11 @@
 .scroller {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-  height: 620px; /* or any desired height */
+  height: 100%; /* or any desired height */
 }
 
 section {
-  border: 2px solid #0828b6;
+  border: 2px solid #b60808;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }

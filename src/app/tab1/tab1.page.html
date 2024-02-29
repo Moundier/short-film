@@ -1,8 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
 
-    <ion-buttons>
-      <ion-icon slot="icon-only" name="search"></ion-icon>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
     </ion-buttons>
 
     <ion-buttons slot="start">
@@ -23,7 +25,7 @@
 
   <div class="scroller">
 
-    <section class="section" *ngFor="let item of list">
+    <section #dinamic *ngFor="let item of list">
 
       <ion-grid>
         <ion-row>
