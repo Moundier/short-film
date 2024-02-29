@@ -21,119 +21,30 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+
+<ion-content>
+
+  <swiper-container (slidechange)="swiperSlideChanged($event)" direction="vertical">
+    <swiper-slide *ngFor="let item of list" style="background-color: lightblue;">
+    
+      <video src="../../assets/adobe-stock-sample.mp4"></video>
+    
+    </swiper-slide>
+  </swiper-container>
+
+</ion-content>
+
+<!-- <ion-content [fullscreen]="true">
 
   <div class="scroller">
 
     <section #dinamic *ngFor="let item of list">
 
-      <ion-grid is-active="">
-        <ion-row>
-          <ion-col>
-            <div>
-              <video src="../../assets/adobe-stock-sample.mp4" muted loop autoplay></video>
-            </div>
-
-            <ion-row class="header">
-              <ion-icon name="play-sharp"></ion-icon>
-
-              <ion-button size="small">
-                <ion-icon slot="icon-only" name="volume-high"></ion-icon>
-              </ion-button>
-            </ion-row>
-
-            <ion-col class="details">
-              <div class="ion-activatable ripple-parent circle">
-                <ion-ripple-effect></ion-ripple-effect>
-                <ion-icon name="play-sharp"></ion-icon>
-              </div>
-            </ion-col>
-
-            <ion-row>
-              <ion-col class="footer">
-                <ion-chip>
-                  <ion-avatar>
-                    <img alt="Silhouette of a person's head"
-                      src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                  </ion-avatar>
-                  <ion-label>{{ item.owner }}</ion-label>
-                </ion-chip>
-
-                <ion-button size="small" shape="round">
-                  <ion-label>View</ion-label>
-                </ion-button>
-              </ion-col>
-            </ion-row>
-
-          </ion-col>
-
-          <ion-col class="control_panel" size="auto">
-
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="thumbs-up-sharp"></ion-icon>
-            </div>
-            <ion-label>10K</ion-label>
-
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="thumbs-down-sharp"></ion-icon>
-            </div>
-            <ion-label>Dislike</ion-label>
-
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="chatbox-sharp"></ion-icon>
-            </div>
-            <ion-label>532</ion-label>
-
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="share-social-sharp"></ion-icon>
-            </div>
-            <ion-label>Share</ion-label>
-
-            <div id="popover_button" class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
-            </div>
-            <ion-popover trigger="popover_button" [dismissOnSelect]="true">
-              <ng-template>
-                <ion-content>
-                  <ion-list>
-                    <ion-item [button]="true" [detail]="false">Option 1</ion-item>
-                    <ion-item [button]="true" [detail]="false">Option 2</ion-item>
-                    <ion-item [button]="true" id="nested-trigger">More options...</ion-item>
-
-                    <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
-                      <ng-template>
-                        <ion-content>
-                          <ion-list>
-                            <ion-item [button]="true" [detail]="false">Nested option</ion-item>
-                          </ion-list>
-                        </ion-content>
-                      </ng-template>
-                    </ion-popover>
-                  </ion-list>
-                </ion-content>
-              </ng-template>
-            </ion-popover>
-
-            <div class="ion-activatable ripple-parent rounded-rectangle">
-              <ion-ripple-effect></ion-ripple-effect>
-
-              <ion-avatar class="avatar">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </ion-avatar>
-            </div>
-
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      
 
     </section>
 
-  </div>
+  </div> -->
 
 
 
@@ -146,4 +57,6 @@
 
   <app-explore-container name="Tab 1 page"></app-explore-container> -->
 
-</ion-content>
+<!-- </ion-content> -->
+
+

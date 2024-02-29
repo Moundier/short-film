@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect, IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Data } from './data';
@@ -35,34 +35,15 @@ import { CommonModule } from '@angular/common';
     IonList,
     IonItem
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class Tab1Page implements AfterViewInit {
-
-  @ViewChildren('dinamic') 
-  elements: QueryList<ElementRef> = new QueryList<ElementRef>();
+export class Tab1Page {
 
   constructor() { }
 
-  ngAfterViewInit(): void {
-    this.adjustElementHeight();
+  swiperSlideChanged(e: any) {
+    console.log('Change: ', e);
   }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    console.log('Window resized:', event.target.innerWidth, 'x', event.target.innerHeight);
-    this.adjustElementHeight();
-  }
-
-  adjustElementHeight() {
-    const screenHeight = window.innerHeight;
-
-    for (const e of this.elements) {
-      const element = e.nativeElement;
-      console.log(e.nativeElement)
-      element.style.height = screenHeight + 'px';
-    }
-  }
-  
 
   list: Data[] = [
     {
