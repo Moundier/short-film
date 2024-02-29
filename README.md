@@ -8,8 +8,9 @@ This is an angular ionic project
 - `npx ionic serve`
 
 ### Todo
-- `Implement scroll snap (align and stop)`
-- `Implement foreach mockup data`
+- Pagination on Scroll https://www.youtube.com/watch?v=eXd1dcbAZSw
+
+Search for: how to implement ion slides in ionic
 
 - `Implement action play and stop `
 - `Implement action mute and dismute`
@@ -22,4 +23,6 @@ This is an angular ionic project
 
 - `Implement user session`
 - `Implement cookies instead of localstorage`
+
+
 

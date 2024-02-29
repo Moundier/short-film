@@ -36,14 +36,14 @@ import { CommonModule } from '@angular/common';
     IonItem
   ],
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page implements AfterViewInit {
 
   @ViewChildren('dinamic') 
   elements: QueryList<ElementRef> = new QueryList<ElementRef>();
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.adjustElementHeight();
   }
 
@@ -55,12 +55,11 @@ export class Tab1Page implements OnInit {
 
   adjustElementHeight() {
     const screenHeight = window.innerHeight;
-    const heightPercentage = 50; // Adjust this percentage as needed
 
     for (const e of this.elements) {
       const element = e.nativeElement;
       console.log(e.nativeElement)
-      element.style.height = screenHeight * heightPercentage / 100 + 'px';
+      element.style.height = screenHeight + 'px';
     }
   }
   

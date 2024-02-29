@@ -43,7 +43,6 @@ ion-col {
 
 ion-col.header {
   width: 200px;
-  background-color: red;
 }
 
 video {
@@ -71,7 +70,7 @@ ion-col.flexible {
 }
 
 ion-col.details {
-  height: 420px;
+  height: 420px; /* main height */
   display: flex;
   align-items: center;
   justify-content: center;
