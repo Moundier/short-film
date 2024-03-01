@@ -72,7 +72,7 @@ export class Tab1Page implements OnInit {
     },
     {
       owner: "Ana",
-      image: "https://placehold.co/400x600/00FF00/FFF",
+      image: "https://placehold.co/400x600/2A690A/FFF",
       domain: "example2.com",
       domainImage: "example2.jpg",
       liked: 15,

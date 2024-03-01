@@ -23,7 +23,6 @@
 
 
 <ion-content>
-
   <swiper-container class="vertical_swiper" (slidechange)="slideChange($event)" direction="vertical">
 
     <swiper-slide *ngFor="let item of list">
@@ -36,34 +35,38 @@
 
           <ion-col class="details">
 
-            <ion-row class="header">
+            <ion-row class="row_of_header" style="justify-content: space-between; width: 100%;">
               <div class="ion-activatable ripple-parent circle">
                 <ion-ripple-effect></ion-ripple-effect>
                 <ion-icon name="thumbs-up-sharp"></ion-icon>
               </div>
-              <ion-label>10K</ion-label>
+
+              <div class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="volume-high"></ion-icon>
+              </div>
             </ion-row>
 
-            <ion-row style="justify-content: center; height: 100%;">
+            <ion-row class="row_of_center" style="justify-content: center; align-items: center; width: 100%; height: 100%;">
               <div class="ion-activatable ripple-parent circle">
                 <ion-ripple-effect></ion-ripple-effect>
                 <ion-icon name="play-sharp"></ion-icon>
               </div>
             </ion-row>
 
-            <ion-row style="justify-content: flex-end;">
-              <ion-col>
+            <ion-row class="row_of_details" style="justify-content: flex-end;">
+              <ion-col style=" margin-left: 5px;">
                 <ion-row style="display: flex; align-items: center;">
-                  <img style="margin: 10px;" class="groupImg" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                  <ion-label style="margin: 10px;">{{ item.owner }}</ion-label>
+                  <img style="border-radius: 50%;" class="group_image" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  <ion-label style="margin-left: 10px; margin-right: 10px;">{{ item.owner }}</ion-label>
 
-                  <ion-button style="margin: 5px;" size="small" shape="round">
-                    <ion-label>Inscrever-se</ion-label>
+                  <ion-button size="small" shape="round">
+                    See More
                   </ion-button>
                 </ion-row>
                 
-                <ion-row>
-                  <ion-label>Recommendation based system. Powered by Lumac.</ion-label>
+                <ion-row style="margin-bottom: 0;">
+                  <ion-label>Recommendation based system. Powered by LUMAC.</ion-label>
                 </ion-row>
               </ion-col>
             </ion-row>
