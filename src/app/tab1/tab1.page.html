@@ -28,37 +28,45 @@
 
     <swiper-slide *ngFor="let item of list">
       <ion-grid>
-        <ion-row>
+        <ion-row class="slide_image">
 
-          <img [src]="item.image" alt="">
-          <!-- conditional display -->
-          <!-- <video src="https://placehold.co/1920x1080.mp4"></video> conditional display, and conditional display based on vertical or horizontal video -->
+          <img class="slide" [src]="item.image" alt="">
+          <!--  TODO: conditional display of either img or video -->
+          <!-- <video src="https://placehold.co/720x1080.mp4"></video>  -->
 
           <ion-col class="details">
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="thumbs-up-sharp"></ion-icon>
-            </div>
-            <ion-label>10K</ion-label>
 
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="play-sharp"></ion-icon>
-            </div>
+            <ion-row class="header">
+              <div class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="thumbs-up-sharp"></ion-icon>
+              </div>
+              <ion-label>10K</ion-label>
+            </ion-row>
 
-            <ion-chip>
-              <ion-avatar>
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </ion-avatar>
-              <ion-label>{{ item.owner }}</ion-label>
-            </ion-chip>
+            <ion-row style="justify-content: center; height: 100%;">
+              <div class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="play-sharp"></ion-icon>
+              </div>
+            </ion-row>
 
-            <ion-label>Recommendation based system. Powered by Lumac.</ion-label>
+            <ion-row style="justify-content: flex-end;">
+              <ion-col>
+                <ion-row style="display: flex; align-items: center;">
+                  <img style="margin: 10px;" class="groupImg" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  <ion-label style="margin: 10px;">{{ item.owner }}</ion-label>
 
-            <ion-button size="small" shape="round">
-              <ion-label>View</ion-label>
-            </ion-button>
-
+                  <ion-button style="margin: 5px;" size="small" shape="round">
+                    <ion-label>Inscrever-se</ion-label>
+                  </ion-button>
+                </ion-row>
+                
+                <ion-row>
+                  <ion-label>Recommendation based system. Powered by Lumac.</ion-label>
+                </ion-row>
+              </ion-col>
+            </ion-row>
           </ion-col>
 
           <ion-col class="control_panel" size="auto">
@@ -87,12 +95,12 @@
             </div>
             <ion-label>Share</ion-label>
 
-            <div id="popover_button" class="ion-activatable ripple-parent circle">
+            <div class="ion-activatable ripple-parent circle">
               <ion-ripple-effect></ion-ripple-effect>
               <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
             </div>
 
-            <img class="avatar" alt="Silhouette of a person's head"
+            <img class="image_domain" alt="Silhouette of a person's head"
               src="https://ionicframework.com/docs/img/demos/avatar.svg">
 
           </ion-col>

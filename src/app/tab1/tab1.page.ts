@@ -97,6 +97,15 @@ export class Tab1Page implements OnInit {
       disliked: 3,
       comments: 30
     },
+    {
+      owner: "Um nome bem grande como teste de display. Limitar caso atrapalhe o botao ao lado.",
+      image: "https://placehold.co/400x600/FFA500/FFF",
+      domain: "example2.com",
+      domainImage: "example2.jpg",
+      liked: 15,
+      disliked: 3,
+      comments: 30
+    },
   ];
 
 }

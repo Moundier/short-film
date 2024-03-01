@@ -8,9 +8,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   constructor() {}
 
-  ngAfterViewInit(): void {
-  }
 }
