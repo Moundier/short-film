@@ -8,8 +8,12 @@ import {
   IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem 
 } from '@ionic/angular/standalone';
 
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import Swiper from 'swiper';
 
+import { register as swiperPrepare } from 'swiper/element/bundle';
+
+swiperPrepare();
 
 @Component({
   selector: 'app-tab1',
@@ -40,15 +44,19 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
     IonContent,
     IonPopover,
     IonList,
-    IonItem
+    IonItem,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 
   constructor() { }
 
-  swiperSlideChanged(e: any) {
+  ngOnInit(): void {
+    console.log('[Load] Tab 1')
+  }
+
+  slideChange(e: any) {
     console.log('Change: ', e);
   }
 
@@ -90,7 +98,6 @@ export class Tab1Page {
       comments: 30
     },
   ];
-
 
 }
 

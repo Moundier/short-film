@@ -24,9 +24,9 @@
 
 <ion-content>
 
-  <swiper-container (slidechange)="swiperSlideChanged($event)" direction="vertical">
-    <swiper-slide *ngFor="let item of list">
+  <swiper-container class="vertical_swiper" (slidechange)="slideChange($event)" direction="vertical">
 
+    <swiper-slide *ngFor="let item of list">
       <ion-grid>
         <ion-row>
 
