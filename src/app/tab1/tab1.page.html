@@ -30,7 +30,7 @@
       <ion-grid>
         <ion-row>
 
-          <!-- <img [src]="item.image" alt=""> -->
+          <img [src]="item.image" alt="">
           <!-- conditional display -->
           <!-- <video src="https://placehold.co/1920x1080.mp4"></video> conditional display, and conditional display based on vertical or horizontal video -->
 
@@ -41,23 +41,24 @@
             </div>
             <ion-label>10K</ion-label>
 
-              <div class="ion-activatable ripple-parent circle">
-                <ion-ripple-effect></ion-ripple-effect>
-                <ion-icon name="play-sharp"></ion-icon>
-              </div>
+            <div class="ion-activatable ripple-parent circle">
+              <ion-ripple-effect></ion-ripple-effect>
+              <ion-icon name="play-sharp"></ion-icon>
+            </div>
 
-                <ion-chip>
-                  <ion-avatar>
-                    <img alt="Silhouette of a person's head"
-                      src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                  </ion-avatar>
-                  <ion-label>{{ item.owner }}</ion-label>
-                </ion-chip>
+            <ion-chip>
+              <ion-avatar>
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label>{{ item.owner }}</ion-label>
+            </ion-chip>
 
-                <ion-button size="small" shape="round">
-                  <ion-label>View</ion-label>
-                </ion-button>
-            
+            <ion-label>Recommendation based system. Powered by Lumac.</ion-label>
+
+            <ion-button size="small" shape="round">
+              <ion-label>View</ion-label>
+            </ion-button>
+
           </ion-col>
 
           <ion-col class="control_panel" size="auto">
@@ -91,7 +92,8 @@
               <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
             </div>
 
-            <img class="avatar" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" >
+            <img class="avatar" alt="Silhouette of a person's head"
+              src="https://ionicframework.com/docs/img/demos/avatar.svg">
 
           </ion-col>
 
