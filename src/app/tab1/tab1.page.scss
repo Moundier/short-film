@@ -1,5 +1,10 @@
 /* Scroll snap */
 
+ion-content ion-icon {
+  color: #eeeeee;
+  font-size: 1.40em;
+}
+
 swiper-container {
   background-color: #141414;
   width: 100%;
@@ -102,11 +107,6 @@ ion-col.control_panel {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-ion-icon {
-  color: #eeeeee;
-  font-size: 1.40em;
 }
 
 img.image_domain {
