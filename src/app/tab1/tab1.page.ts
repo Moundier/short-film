@@ -1,8 +1,15 @@
-import { AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect, IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem } from '@ionic/angular/standalone';
+
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { Data } from './data';
 import { CommonModule } from '@angular/common';
+
+import { 
+  IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow,
+  IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect,
+  IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem 
+} from '@ionic/angular/standalone';
+
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-tab1',
@@ -48,7 +55,7 @@ export class Tab1Page {
   list: Data[] = [
     {
       owner: "John Doe",
-      ownerImage: "john-doe.jpg",
+      image: "https://placehold.co/400x600/6495ED/FFF",
       domain: "example.com",
       domainImage: "example.jpg",
       liked: 10,
@@ -57,7 +64,7 @@ export class Tab1Page {
     },
     {
       owner: "Ana",
-      ownerImage: "jane-smith.jpg",
+      image: "https://placehold.co/400x600/00FF00/FFF",
       domain: "example2.com",
       domainImage: "example2.jpg",
       liked: 15,
@@ -66,7 +73,7 @@ export class Tab1Page {
     },
     {
       owner: "Bob",
-      ownerImage: "jane-smith.jpg",
+      image: "https://placehold.co/400x600/0000FF/FFF",
       domain: "example2.com",
       domainImage: "example2.jpg",
       liked: 15,
@@ -75,7 +82,7 @@ export class Tab1Page {
     },
     {
       owner: "Chen",
-      ownerImage: "jane-smith.jpg",
+      image: "https://placehold.co/400x600/FFA500/FFF",
       domain: "example2.com",
       domainImage: "example2.jpg",
       liked: 15,
@@ -85,4 +92,14 @@ export class Tab1Page {
   ];
 
 
+}
+
+interface Data {
+  owner: string;
+  image: string;
+  domain:  string;
+  domainImage:  string;
+  liked: number;
+  disliked: number;
+  comments: number;
 }
