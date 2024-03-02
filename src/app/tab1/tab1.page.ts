@@ -5,15 +5,14 @@ import { CommonModule } from '@angular/common';
 import { 
   IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow,
   IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect,
-  IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem 
+  IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem, 
 } from '@ionic/angular/standalone';
 
 import { AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import Swiper from 'swiper';
+import { register } from 'swiper/element/bundle';
 
-import { register as swiperPrepare } from 'swiper/element/bundle';
+register();
 
-swiperPrepare();
 
 @Component({
   selector: 'app-tab1',
@@ -56,8 +55,12 @@ export class Tab1Page implements OnInit {
     console.log('[Load] Tab 1')
   }
 
-  slideChange(e: any) {
-    console.log('Change: ', e);
+  onSlideChange() {
+    console.log('Slide changed:');
+  }
+
+  handleImage(event: any) {
+    console.log(event)
   }
 
   list: Data[] = [

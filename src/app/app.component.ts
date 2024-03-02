@@ -1,4 +1,4 @@
-import { AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 @Component({
@@ -6,7 +6,6 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   templateUrl: 'app.component.html',
   standalone: true,
   imports: [IonApp, IonRouterOutlet],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppComponent {
   constructor() {}
