@@ -49,18 +49,30 @@ register();
 })
 export class Tab1Page implements OnInit {
 
+  public Interaction = Interaction;
+
   constructor() { }
 
   ngOnInit(): void {
     console.log('[Load] Tab 1')
   }
 
-  onSlideChange() {
-    console.log('Slide changed:');
+  swiperSlideChange(e: any) {
+    console.log(e);
   }
 
-  handleImage(event: any) {
-    console.log(event)
+  handleTap(e: any, item: Data) {
+    switch (e) {
+      case Interaction.LIKE:
+        console.log(`LIKE`, item);
+        break;
+      case Interaction.DISLIKE:
+        console.log(`DISLIKE`, item);
+        break;
+      case Interaction.COMMENT:
+        console.log(`COMMENT`, item);
+        break;
+    }
   }
 
   list: Data[] = [
@@ -111,6 +123,17 @@ export class Tab1Page implements OnInit {
     },
   ];
 
+}
+
+enum Interaction {
+  LIKE,
+  DISLIKE,
+  COMMENT,
+  SHARE,
+  OPTIONS,
+  DOMAIN_DETAILS,
+  USER_DETAILS,
+  SEE_MORE,
 }
 
 interface Data {
