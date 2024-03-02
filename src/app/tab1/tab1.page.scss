@@ -76,13 +76,17 @@ ion-row.row_of_header {
 
   --padding-top: 10px;
   --padding-bottom: 10px;
-  text-transform: none;
 }
 
 .details > * {
   margin-left: 10.00px;
   margin-top: 10.00px;
   margin-bottom: 10.00px;
+}
+
+.row_of_user_more:hover {
+  background-color: red;
+  border-radius: 40px;
 }
 
 ion-col.details {

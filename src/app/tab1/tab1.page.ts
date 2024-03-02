@@ -50,11 +50,15 @@ register();
 export class Tab1Page implements OnInit {
 
   public Interaction = Interaction;
+  
+  @ViewChild('videoElement') videoElement: HTMLVideoElement | undefined;
+  isPlaying: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log('[Load] Tab 1')
+    console.log('[Load] Tab 1');
+    this.videoElement?.play
   }
 
   swiperSlideChange(e: any) {
@@ -63,6 +67,12 @@ export class Tab1Page implements OnInit {
 
   handleTap(e: any, item: Data) {
     switch (e) {
+      case Interaction.PLAY_STOP:
+        console.log(`PLAY_STOP`, item);
+        break;
+      case Interaction.VOLUME:
+        console.log(`VOLUME`, item);
+        break;
       case Interaction.LIKE:
         console.log(`LIKE`, item);
         break;
@@ -72,6 +82,40 @@ export class Tab1Page implements OnInit {
       case Interaction.COMMENT:
         console.log(`COMMENT`, item);
         break;
+      case Interaction.SHARE:
+        console.log(`SHARE`, item);
+        break;
+      case Interaction.SEE_MORE_USER:
+        console.log(`SEE_MORE_ITEM`, item);
+        break;
+      case Interaction.SEE_MORE_ITEM:
+        console.log(`SEE_MORE_ITEM`, item);
+        break;
+    }
+  }
+
+  private onPlay() {
+    this.isPlaying = true;
+    console.log(`[Video context] Playing`);
+  }
+
+  private onPause() {
+    this.isPlaying = false;
+    console.log(`[Video context] Paused`)
+  }
+
+  public toggleVideo(video: HTMLVideoElement | undefined) {
+
+    if (!video) {
+      return;
+    }
+
+    if (video.paused) {
+      video.play();
+      this.onPlay();
+    } else {
+      video.pause();
+      this.onPause();
     }
   }
 
@@ -105,7 +149,7 @@ export class Tab1Page implements OnInit {
     },
     {
       owner: "Chen",
-      image: "https://placehold.co/400x600/FFA500/FFF",
+      image: "https://placehold.co/400x600/CC0000/FFF",
       domain: "example2.com",
       domainImage: "example2.jpg",
       liked: 15,
@@ -126,14 +170,17 @@ export class Tab1Page implements OnInit {
 }
 
 enum Interaction {
+  IMAGE,
+  VOLUME,
+  PLAY_STOP,
   LIKE,
   DISLIKE,
   COMMENT,
   SHARE,
   OPTIONS,
   DOMAIN_DETAILS,
-  USER_DETAILS,
-  SEE_MORE,
+  SEE_MORE_USER,
+  SEE_MORE_ITEM,
 }
 
 interface Data {

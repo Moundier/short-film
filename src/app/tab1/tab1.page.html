@@ -24,83 +24,86 @@
 <ion-content>
   <swiper-container (swiperslidechange)="swiperSlideChange($event)" class="vertical_swiper" direction="vertical">
     <swiper-slide *ngFor="let item of list">
-      <ion-grid >
-        <ion-row class="slide_image">
+      <ion-grid>
+        <ion-row  class="slide_image">
 
-          <img class="slide" [src]="item.image" alt="" >
-          <!--  TODO: conditional display of either img or video -->
-          <!-- <video src="https://placehold.co/720x1080.mp4"></video>  -->
+          <!-- <img class="slide" [src]="item.image" alt=""> -->
+          <!-- TODO: conditional display of either img or video -->
+          
+          <div style="z-index: 1; position: absolute; width: 90%; height: 78%; margin-top: 60px; pointer-events: auto;" (click)="toggleVideo(videoElement)"></div>
+          <video #videoElement controls autoplay loop style="pointer-events: none;" src="../../assets/adobe-stock-sample.mp4"></video>
 
-          <ion-row class="row_of_header" style="justify-content: space-between; width: 100%;">
+          <ion-row (click)="handleTap(Interaction.PLAY_STOP, item)" class="row_of_header" style="justify-content: space-between; width: 100%;">
             <div class="ion-activatable ripple-parent circle">
               <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="thumbs-up-sharp"></ion-icon>
+              <ion-icon *ngIf="!isPlaying; else pauseIcon" name="play-sharp"></ion-icon>
+              <ng-template #pauseIcon>
+                <ion-icon  name="pause-sharp"></ion-icon>
+              </ng-template>
             </div>
 
-            <div (click)="handleTap(Interaction.LIKE, item)" class="ion-activatable ripple-parent circle">
+            <div (click)="handleTap(Interaction.VOLUME, item)" class="ion-activatable ripple-parent circle">
               <ion-ripple-effect></ion-ripple-effect>
               <ion-icon name="volume-high"></ion-icon>
             </div>
-
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="play-sharp"></ion-icon>
-            </div>
-
           </ion-row>
 
-          <ion-col class="details">            
+          <ion-row class="row_of_details" style="width: 100%; display: flex;">
+            
+            <ion-col style="display: flex; flex-direction: column; align-items: start; justify-content: flex-end; margin-left: 10px;">
+              <ion-row style="display: flex; align-items: center;">
 
-            <ion-row class="row_of_details" style="justify-content: flex-end;">
-              <ion-col style=" margin-left: 5px;">
-                <ion-row style="display: flex; align-items: center;">
-                  <img style="border-radius: 50%;" class="group_image" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                <div class="row_of_user_more" style="display: flex; align-items: center;">
+                  <img style="border-radius: 50%;" class="group_image" alt="Silhouette of a person's head"
+                    src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                   <ion-label style="margin-left: 10px; margin-right: 10px;">{{ item.owner }}</ion-label>
-                  <ion-button class="see_more" style="text-transform: none; font-size: 12px;" size="small" shape="round">See more</ion-button>
-                </ion-row>
-                
-                <ion-row style="margin-bottom: 0;">
-                  <ion-label>Recommendation based system. Powered by LUMAC.</ion-label>
-                </ion-row>
-              </ion-col>
-            </ion-row>
-          </ion-col>
+                </div>
 
-          <ion-col class="control_panel" size="auto">
+                <ion-button (click)="handleTap(Interaction.SEE_MORE_ITEM, item)" class="see_more"
+                  style="text-transform: none; font-size: 12px;" size="small" shape="round">See more</ion-button>
+              </ion-row>
 
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="thumbs-up-sharp"></ion-icon>
-            </div>
-            <ion-label>10K</ion-label>
+              <ion-row style="margin-bottom: 20px;">
+                <ion-label>Recommendation based system. Powered by LUMAC.</ion-label>
+              </ion-row>
+            </ion-col>
 
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="thumbs-down-sharp"></ion-icon>
-            </div>
-            <ion-label>Dislike</ion-label>
+            <ion-col class="control_panel" size="auto">
 
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="chatbox-sharp"></ion-icon>
-            </div>
-            <ion-label>532</ion-label>
-
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="share-social-sharp"></ion-icon>
-            </div>
-            <ion-label>Share</ion-label>
-
-            <div class="ion-activatable ripple-parent circle">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
-            </div>
-
-            <img class="image_domain" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg">
-
-          </ion-col>
-
+              <div (click)="handleTap(Interaction.LIKE, item)" class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="thumbs-up-sharp"></ion-icon>
+              </div>
+              <ion-label>10K</ion-label>
+  
+              <div (click)="handleTap(Interaction.DISLIKE, item)" class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="thumbs-down-sharp"></ion-icon>
+              </div>
+              <ion-label>Dislike</ion-label>
+  
+              <div (click)="handleTap(Interaction.COMMENT, item)" class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="chatbox-sharp"></ion-icon>
+              </div>
+              <ion-label>532</ion-label>
+  
+              <div (click)="handleTap(Interaction.SHARE, item)" class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="share-social-sharp"></ion-icon>
+              </div>
+              <ion-label>Share</ion-label>
+  
+              <div class="ion-activatable ripple-parent circle">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
+              </div>
+  
+              <img class="image_domain" alt="Silhouette of a person's head"
+                src="https://ionicframework.com/docs/img/demos/avatar.svg">
+  
+            </ion-col>
+          </ion-row>
         </ion-row>
       </ion-grid>
 
