@@ -8,11 +8,10 @@ import {
   IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem, 
 } from '@ionic/angular/standalone';
 
-import { AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, ViewChild } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 
 register();
-
 
 @Component({
   selector: 'app-tab1',
@@ -61,11 +60,11 @@ export class Tab1Page implements OnInit {
     this.videoElement?.play
   }
 
-  swiperSlideChange(e: any) {
+  swiperSlideChange(e: any): void {
     console.log(e);
   }
 
-  handleTap(e: any, item: Data) {
+  handleTap(e: any, item: Data): void {
     switch (e) {
       case Interaction.PLAY_STOP:
         console.log(`PLAY_STOP`, item);
@@ -94,21 +93,17 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  private onPlay() {
+  private onPlay(): void {
     this.isPlaying = true;
     console.log(`[Video context] Playing`);
   }
 
-  private onPause() {
+  private onPause(): void {
     this.isPlaying = false;
     console.log(`[Video context] Paused`)
   }
 
-  public toggleVideo(video: HTMLVideoElement | undefined) {
-
-    if (!video) {
-      return;
-    }
+  public toggleVideo(video: HTMLVideoElement): void {
 
     if (video.paused) {
       video.play();
@@ -116,7 +111,7 @@ export class Tab1Page implements OnInit {
     } else {
       video.pause();
       this.onPause();
-    }
+    };
   }
 
   list: Data[] = [
