@@ -1,5 +1,75 @@
-swiper-slide {
-  background-color: aquamarine;
-  padding: 20px;
+ion-grid {
+  margin-bottom: 20px;
+}
+
+.card-col {
+  margin-top: 10px;
+}
+
+.recommend-button {
+  margin-top: 10px;
+}
+
+.favorite-card {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
+  height: 100%;
+
+  ion-card-title {
+    font-size: larger;
+    text-align: justify;
+  }
+}
+
+/* Swiper */
+
+swiper-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
   color: #000;
+  background-color: lightslategrey;
+}
+
+swiper-slide {
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+swiper-slide > ion-button {
+  font-size: 14px;
+  --color: #000000;
+  --background: lightblue;
+
+  --border-radius: 40px;
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 1px;
+
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+  --ripple-color: rgb(24, 57, 202);
+
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --margin: 0;
+  text-transform: none;
+}
+
+ion-card > ion-button {
+
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border-radius: 50px;
+
+  --color: #000;
+
+  --border-radius: 40px;
+  --border-color: #fff;
+  --border-style: solid;
+  --border-width: 0;
+  --background: lightblue;
 }
