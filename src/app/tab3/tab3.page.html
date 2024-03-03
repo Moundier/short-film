@@ -8,33 +8,54 @@
 
 <ion-content color="light" [fullscreen]="true">
 
-    <ion-list [inset]="true">
-      <ion-item>
-        <ion-input label="First Name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input label="Last Name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-toggle>
-          <ion-label>Allow Notifications</ion-label>
-          <ion-note color="medium">Unsubscribe at any time</ion-note>
-        </ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-toggle>
-          <ion-label>Enable Dark Mode</ion-label>
-          <ion-note color="medium">Toggle the button to switch themes</ion-note>
-        </ion-toggle>
-      </ion-item>
-    </ion-list>
-  
-    <ion-list [inset]="true">
-      <ion-item>
-        <ion-textarea label="Comments" labelPlacement="floating" rows="5"></ion-textarea>
-      </ion-item>
-    </ion-list>
-  
-    <ion-note style="padding: 5px;" color="medium">Your comments will be kept anonymous and will only be used to improve the reliability of our products.</ion-note>
+  <ion-list [inset]="true">
+
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+      </ion-thumbnail>
+      <ion-label>Item</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="First Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Last Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-toggle>
+        <ion-label>Allow Notifications</ion-label>
+        <ion-note color="medium">Unsubscribe at any time</ion-note>
+      </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-toggle>
+        <ion-label>Enable Dark Mode</ion-label>
+        <ion-note color="medium">Toggle the button to switch themes</ion-note>
+      </ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-textarea label="Comments" labelPlacement="floating" rows="3"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <div class="warning">
+    <ion-note color="medium">Your comments will be kept anonymous and will only be used to improve the reliability of our products.</ion-note>
+  </div>
+
+  <swiper-container
+    slides-per-view="4"
+    space-between="10" 
+    grab-cursor="true">
+
+    @for (item of ["Hello", "World", "Programming", "Recommendation", "Java", "Angular"]; track $index) {
+      <swiper-slide style="overflow: hidden;">{{ item }}</swiper-slide>
+    }
+
+  </swiper-container>
 
 </ion-content>
