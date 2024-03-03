@@ -20,21 +20,25 @@
     <ion-item>
       <ion-input label="First Name"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-input label="Last Name"></ion-input>
     </ion-item>
+    
     <ion-item>
       <ion-toggle>
         <ion-label>Allow Notifications</ion-label>
         <ion-note color="medium">Unsubscribe at any time</ion-note>
       </ion-toggle>
     </ion-item>
+
     <ion-item>
       <ion-toggle>
         <ion-label>Enable Dark Mode</ion-label>
         <ion-note color="medium">Toggle the button to switch themes</ion-note>
       </ion-toggle>
     </ion-item>
+    
   </ion-list>
 
   <ion-list [inset]="true">
@@ -47,15 +51,24 @@
     <ion-note color="medium">Your comments will be kept anonymous and will only be used to improve the reliability of our products.</ion-note>
   </div>
 
-  <swiper-container
-    slides-per-view="4"
-    space-between="10" 
-    grab-cursor="true">
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-label>
+        <h2>H2 Heading</h2>
+        <p>Paragraph</p>
+      </ion-label>
+    </ion-item>
 
-    @for (item of ["Hello", "World", "Programming", "Recommendation", "Java", "Angular"]; track $index) {
-      <swiper-slide style="overflow: hidden;">{{ item }}</swiper-slide>
-    }
+    <swiper-container slides-per-view="auto" space-between="10">
+      @for (item of ["Hello", "World", "Programming", "Recommendation", "Java", "Angular", "Design Patterns in Typescript", "Java OOP"]; track $index) {
+        <swiper-slide style="width: auto;">
+          <ion-button (click)="openModal(item)">
+            {{ item }}
+          </ion-button>
+        </swiper-slide>
+      }
+    </swiper-container>
 
-  </swiper-container>
+  </ion-list>
 
 </ion-content>

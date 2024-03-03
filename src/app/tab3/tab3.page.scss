@@ -1,23 +1,41 @@
 swiper-container {
-  margin-top: 10px;
-  margin-inline-start: 16px;
-  background-color: #1f1f1f;
-  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #000;
+  background-color: lightslategrey;
 }
 
 swiper-slide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-left: 10.00px;
 
-  height: 30px;
-  color: #1f1f1f;
-  background-color: #cacaca;
-  border-radius: 20px;
+  // min-width: 100px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 }
 
-.warning {
+swiper-slide > ion-button {
+  font-size: 14px;
+  --color: #000000;
+  --background: lightblue;
+
+  --border-radius: 40px;
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 1px;
+
+  --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+  --ripple-color: rgb(24, 57, 202);
+
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --margin: 0;
+  text-transform: none;
+}
+
+
+div.warning {
   max-width: 600px; 
   padding-left: 20px;
   padding-right: 10px;
