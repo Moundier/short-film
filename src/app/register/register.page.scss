@@ -1,0 +1,42 @@
+.custom_margin {
+  margin-bottom: 1rem;
+}
+
+/* Styles for mobile screens */
+@media screen and (max-width: 767px) {
+
+  .my-element {
+    font-size: 16px;
+  }
+
+  .mobile_padding {
+    padding: 10px;
+  }
+}
+
+/* Custom in Current Use */
+@media screen and (min-width: 768px) {
+  .custom_form {
+    width: 410px;
+    height: 600px;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .center {
+    justify-content: center;
+  }
+}
+
+/* Styles for desktop screens */
+@media screen and (min-width: 1024px) { }
+
+.logo-row {
+  padding-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+

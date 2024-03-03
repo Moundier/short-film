@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="content-container">
+    <div class="register-container">
+      <ion-row class="logo-row">
+        <ion-col>
+          <img src="../../assets/icon/logo6.png">
+        </ion-col>
+      </ion-row>
+
+      <form [formGroup]="form">
+        <ion-card-content class="custom_form">
+
+          <ion-item>
+            <!-- Full Name -->
+            <ion-input formControlName="fullName" label="Full Name" labelPlacement="floating" placeholder="Your fullname" type="text" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <!-- Item Email -->
+            <ion-input formControlName="hostMail" label="Email" labelPlacement="floating" placeholder="email@domain.com" type="email" required></ion-input>
+          </ion-item>
+
+          <ion-label color="danger" *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']">Email is
+            invalid</ion-label>
+
+          <ion-item>
+            <!-- Item Password -->
+            <ion-input formControlName="password" label="Password" labelPlacement="floating" type="{{ showPassword ? 'text' : 'password' }}" placeholder="Password" required></ion-input>
+            <ion-icon name="{{ showPassword ? 'eye' : 'eye-off' }}" slot="end" (click)="togglePassword()"></ion-icon>
+          </ion-item>
+
+          <ion-item>
+            <!-- Confirm Password -->
+            <ion-input formControlName="validate" label="Confirm Password" labelPlacement="floating" type="{{ showPassword ? 'text' : 'password' }}" placeholder="Password" required></ion-input>
+            <ion-icon name="{{ showPassword ? 'eye' : 'eye-off' }}" slot="end" (click)="togglePassword()"></ion-icon>
+          </ion-item>
+
+          <ion-item>
+            <!-- Item Phone Number -->
+            <ion-input formControlName="phoneNum" label="Phone Number" labelPlacement="floating" placeholder="(55)9-9988-7766" type="tel" maxLength="11" required></ion-input>
+          </ion-item>
+
+          <!-- Terms -->
+          <ion-item class="no-border no-background">
+            <ion-checkbox label="terms" formControlName="termsCheckbox">I agree with <a href="">Terms and Policies.</a></ion-checkbox>
+          </ion-item>
+
+          <ion-item class="no-border no-background">
+            <ion-checkbox label="consent" formControlName="consetCheckbox">I agree to the <a href="">Consent Terms.</a></ion-checkbox>
+          </ion-item>
+
+          <div class="logo-row">
+            <div class="flex center">
+              <ion-button size="full" shape="round" color="success" (click)="register()">Create</ion-button>
+              <ion-button size="full" shape="round" fill="clear" color="danger" (click)="routeToLogin()">Cancel</ion-button>
+            </div>
+          </div>
+
+        </ion-card-content>
+      </form>
+    </div>
+  </div>
+
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">register</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+</ion-content>
