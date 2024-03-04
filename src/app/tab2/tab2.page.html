@@ -10,70 +10,40 @@
 
   <ion-grid>
 
-    <ion-row>
-      <ion-card class="custom-card">
+      <ion-card>
         <ion-card-header>
-          <ion-card-title>Favoritos</ion-card-title>
+          <ion-card-title>Card Title</ion-card-title>
+          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
         </ion-card-header>
-
+      
         <ion-card-content>
-          <ion-text>Todas as recomendações que você selecionar o botão de favoritos ficarão aqui</ion-text>
-          <ion-button (click)="redirect()" class="recommend-button" color="logo" fill="outline" expand="block">Buscar
-            mais recomendações</ion-button>
+          Here's a small text description for the card content. Nothing more, nothing less.
         </ion-card-content>
       </ion-card>
-    </ion-row>
 
-    <ion-list [inset]="true">
       <ion-item>
         <ion-label>
           <h2>H2 Heading</h2>
           <p>Paragraph</p>
         </ion-label>
       </ion-item>
-  
-      <swiper-container slides-per-view="auto" space-between="10">
-        @for (item of ["Hello", "World", "Programming", "Recommendation", "Java", "Angular", "Design Patterns in Typescript", "Java OOP"]; track $index) {
-          <swiper-slide style="width: auto;">
-            <ion-button>
-              {{ item }}
-            </ion-button>
-          </swiper-slide>
-        }
-      </swiper-container>
-
-    </ion-list>
 
     <ion-row>
-      <!-- ngfor here -->
-      <ion-col class="card-col" size="6" size-md="4" size-lg="3">
-        <!-- open modal (click)="openCardModal(item.id!)" -->
-        <ion-card class="favorite-card custom-card"  #card>
-          <img  src="https://placehold.co/400x600/323232/FFF" style="max-height: 85px;object-fit: cover" />
-          <img  src="assets/logo/cardlogo.png" />
-          <ion-card-header>
-            <ion-card-title class="limited-lines"> Sample title for the favourites card </ion-card-title>
-          </ion-card-header>
-          <ion-button size="small" shape="round" class="ion-hover">
-            <ion-icon name="close" color="logo"></ion-icon>
-          </ion-button>
-        </ion-card>
-      </ion-col>
 
-      <ion-col class="card-col" size="6" size-md="4" size-lg="3">
-        <!-- open modal (click)="openCardModal(item.id!)" -->
-        <ion-card class="favorite-card custom-card"  #card>
-          <img  src="https://placehold.co/400x600/323232/FFF" style="max-height: 85px;object-fit: cover" />
-          <img  src="assets/logo/cardlogo.png" />
-          <ion-card-header>
-            <ion-card-title class="limited-lines"> Sample title for the favourites card </ion-card-title>
-          </ion-card-header>
-          <ion-button size="small" shape="round" class="ion-hover">
-            <ion-icon name="close" color="logo"></ion-icon>
-          </ion-button>
-        </ion-card>
-      </ion-col>
-
+      @for (item of list; track $index) {
+        <ion-col class="card" size="6" size-md="4" size-lg="2">
+          <ion-card (click)="openModal()">
+            <img class="image_domain" src="https://placehold.co/300x400/FFFFFF/232323" style="max-height: 85px;object-fit: cover" />
+            <img class="image_source" src="https://placehold.co/300x400/AFG223/232323" />
+            <ion-card-header>
+              <p>{{ item.itemName }}</p>
+            </ion-card-header>
+            <ion-button size="small" shape="round">
+              <ion-icon name="close" color="logo"></ion-icon>
+            </ion-button>
+          </ion-card>
+        </ion-col>
+      }
     </ion-row>
 
   </ion-grid>

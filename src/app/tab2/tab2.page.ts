@@ -3,10 +3,6 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, I
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule } from '@angular/common';
 
-import { register } from 'swiper/element/bundle';
-
-register();
-
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -41,6 +37,25 @@ register();
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab2Page {
+
+  list: any[] = [
+    {
+      itemId: 0,
+      itemName: 'Exploring Cyber Security Limits'
+    }, 
+    {
+      itemId: 1,
+      itemName: 'Linear Algebra for Begginers'
+    },
+    {
+      itemId: 2,
+      itemName: 'Client Side Applications for the Web'
+    }, 
+    {
+      itemId: 3,
+      itemName: 'Server Side Applications for the Web'
+    },
+  ];
 
   selectedButton: string | null = null;
 
@@ -77,7 +92,7 @@ export class Tab2Page {
     return [];
   }
 
-  openCardModal(itemId: any): void {
+  openModal(): void {
 
   }
 
