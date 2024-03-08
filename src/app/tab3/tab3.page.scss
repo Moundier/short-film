@@ -2,7 +2,7 @@ swiper-container {
   padding-top: 10px;
   padding-bottom: 10px;
   color: #000;
-  background-color: lightslategrey;
+  background-color: #cee0ff;
 }
 
 swiper-slide {
@@ -12,7 +12,7 @@ swiper-slide {
 swiper-slide > ion-button {
   font-size: 14px;
   --color: #000000;
-  --background: lightblue;
+  --background: rgb(255, 255, 255);
 
   --border-radius: 40px;
   --border-color: #000;
