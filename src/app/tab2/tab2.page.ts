@@ -2,6 +2,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, ViewChild } from '@angul
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, IonChip, IonAvatar, IonImg, IonLabel, IonText, IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect, IonPopover, IonList, IonItem } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule } from '@angular/common';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-tab2',
@@ -38,28 +41,68 @@ import { CommonModule } from '@angular/common';
 })
 export class Tab2Page {
 
-  list: any[] = [
+  public list: any[] = [
     {
-      itemId: 0,
-      itemName: 'Exploring Cyber Security Limits'
-    }, 
-    {
-      itemId: 1,
-      itemName: 'Linear Algebra for Begginers'
+      "itemId": 0,
+      "itemName": "The Inner Workings of the Atom: Exploring Atomic Structure",
+      "itemImage": "https://placehold.co/250x320/333333/FF5733",
     },
     {
-      itemId: 2,
-      itemName: 'Client Side Applications for the Web'
-    }, 
-    {
-      itemId: 3,
-      itemName: 'Server Side Applications for the Web'
+      "itemId": 1,
+      "itemName": "The Biology of Cells: Investigating the Building Blocks of Life",
+      "itemImage": "https://placehold.co/250x320/FF78AD/33FF57",
     },
+    {
+      "itemId": 2,
+      "itemName": "Newton's Laws in Action: Exploring Classical Mechanics",
+      "itemImage": "https://placehold.co/250x320/44AAAAD/5733FF",
+    },
+    {
+      "itemId": 3,
+      "itemName": "Server Side Applications for the Web",
+      "itemImage": "https://placehold.co/250x320/99ADFC/FF5733",
+    },
+    {
+      "itemId": 4,
+      "itemName": "The Human Body: Anatomy and Physiology Explained",
+      "itemImage": "https://placehold.co/250x320/AAAAA9/33FF57",
+    },
+    {
+      "itemId": 5,
+      "itemName": "Mathematics in Motion: Exploring Patterns and Algorithms",
+      "itemImage": "https://placehold.co/250x320/CFB829/5733FF",
+    },
+    {
+      "itemId": 6,
+      "itemName": "Astrophysics: A Journey Through the Cosmos",
+      "itemImage": "https://placehold.co/250x320/FF5733/78ADFC",
+    },
+    {
+      "itemId": 7,
+      "itemName": "Chemical Reactions: Understanding Molecular Transformations",
+      "itemImage": "https://placehold.co/250x320/33FF57/AA33FF",
+    },
+    {
+      "itemId": 8,
+      "itemName": "Artificial Intelligence: Exploring Intelligent Systems",
+      "itemImage": "https://placehold.co/250x320/5733FF/CFB829",
+    },
+    {
+      "itemId": 9,
+      "itemName": "Environmental Science: Investigating Ecosystems and Sustainability",
+      "itemImage": "https://placehold.co/250x320/DADA22/44AAAAD",
+    },
+    {
+      "itemId": 10,
+      "itemName": "Robotics and Automation: Designing Autonomous Systems",
+      "itemImage": "https://placehold.co/250x320/78ADFC/FF78AD",
+    }
   ];
 
-  selectedButton: string | null = null;
 
-  constructor() {}
+  public selectedButton: string | null = null;
+
+  constructor() { }
 
   redirect(): void {
 

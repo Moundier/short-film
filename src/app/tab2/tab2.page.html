@@ -10,39 +10,40 @@
 
   <ion-grid>
 
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title</ion-card-title>
-          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          Here's a small text description for the card content. Nothing more, nothing less.
-        </ion-card-content>
-      </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Card Title</ion-card-title>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      </ion-card-header>
 
-      <ion-item>
-        <ion-label>
-          <h2>H2 Heading</h2>
-          <p>Paragraph</p>
-        </ion-label>
-      </ion-item>
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-item>
+      <ion-label>
+        <h2>H2 Heading</h2>
+        <p>Paragraph</p>
+      </ion-label>
+    </ion-item>
 
     <ion-row>
-
       @for (item of list; track $index) {
-        <ion-col class="card" size="6" size-md="4" size-lg="2">
-          <ion-card (click)="openModal()">
-            <img class="image_domain" src="https://placehold.co/300x400/FFFFFF/232323" style="max-height: 85px;object-fit: cover" />
-            <img class="image_source" src="https://placehold.co/300x400/AFG223/232323" />
-            <ion-card-header>
-              <p>{{ item.itemName }}</p>
-            </ion-card-header>
-            <ion-button size="small" shape="round">
-              <ion-icon name="close" color="logo"></ion-icon>
-            </ion-button>
-          </ion-card>
-        </ion-col>
+      <ion-col class="card" size="6" col-6 no-padding>
+        <ion-card (click)="openModal()">
+          <img class="image_domain" src="https://placehold.co/250x320/FFFFFF/232323" style="object-fit: cover" />
+          <img class="image_source" [src]="item.itemImage" />
+
+          <ion-button size="small" shape="round">
+            <ion-icon name="close" color="logo"></ion-icon>
+          </ion-button>
+
+          <ion-card-header>
+            {{ item.itemName }}
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
       }
     </ion-row>
 
