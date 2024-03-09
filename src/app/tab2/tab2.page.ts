@@ -123,6 +123,10 @@ export class Tab2Page {
     }
   }
 
+  wipeBookmark(): void {
+    console.log('Click');
+  }
+
   getUniqueTopics(): any[] {
     return [];
   }
@@ -136,10 +140,6 @@ export class Tab2Page {
   }
 
   openModal(): void {
-
-  }
-
-  removeFavorite(itemId: any): void {
 
   }
 

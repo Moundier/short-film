@@ -33,12 +33,12 @@
   <ion-grid>
     <ion-row>
       @for (item of list; track $index) {
-      <ion-col class="card" size="6">
-        <ion-card (click)="openModal()">
+      <ion-col class="card" size="lg" size="6">
+        <ion-card style="margin: 0px; margin-bottom: 2px;" (click)="openModal()">
           <img class="image_domain" src="https://placehold.co/250x320/FFFFFF/232323" style="object-fit: cover" />
           <img class="image_source" [src]="item.itemImage" />
 
-          <ion-button size="small" shape="round">
+          <ion-button (click)="wipeBookmark();" size="small" shape="round">
             <ion-icon name="close" color="logo"></ion-icon>
           </ion-button>
 
