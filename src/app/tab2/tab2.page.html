@@ -9,7 +9,6 @@
 <ion-content [fullscreen]="true">
 
   <ion-grid>
-
     <ion-card>
       <ion-card-header>
         <ion-card-title>Card Title</ion-card-title>
@@ -20,17 +19,21 @@
         Here's a small text description for the card content. Nothing more, nothing less.
       </ion-card-content>
     </ion-card>
+  </ion-grid>
 
+  <ion-list [inset]="true">
     <ion-item>
       <ion-label>
         <h2>H2 Heading</h2>
         <p>Paragraph</p>
       </ion-label>
     </ion-item>
+  </ion-list>
 
+  <ion-grid>
     <ion-row>
       @for (item of list; track $index) {
-      <ion-col class="card" size="6" col-6 no-padding>
+      <ion-col class="card" size="6">
         <ion-card (click)="openModal()">
           <img class="image_domain" src="https://placehold.co/250x320/FFFFFF/232323" style="object-fit: cover" />
           <img class="image_source" [src]="item.itemImage" />
