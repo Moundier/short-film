@@ -1,6 +1,6 @@
 
 ion-button {
-  --background: #3d292941;
+  --background: #64c9ee36; /* Logo color is 64C9EE */
   // --background-hover: #9ce0be;
   --background-activated: #d3d3d3;
   // --background-focused: #88f4be;
@@ -118,14 +118,14 @@ ion-checkbox {
 }
 
 .sublogo {
-  max-width: 140px;
-  max-height: 140px;
+  max-width: 80px;
+  max-height: 80px;
 }
 
 .invert {
-  max-width: 140px;
-  max-height: 140px;
+  max-width: 80px;
+  max-height: 80px;
 
-  -webkit-filter: invert(.75); /* safari 6.0 - 9.0 */
-  filter: invert(.75);
+  -webkit-filter: invert(.35); /* safari 6.0 - 9.0 */
+  filter: invert(.35);
 }

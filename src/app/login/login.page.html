@@ -36,10 +36,7 @@
             <ion-icon name="{{ showPassword ? 'eye' : 'eye-off' }}" slot="end" (click)="togglePassword()"></ion-icon>
           </ion-item>
 
-
-          <ion-card-content>
-            <ion-checkbox>Lembre-se de mim</ion-checkbox>
-          </ion-card-content>
+          <ion-toggle color="success" style="margin: 10px;" labelPlacement="end">Remember me</ion-toggle><br /><br />
 
           <!-- http://localhost:8100/login -->
 
@@ -59,12 +56,9 @@
 
           <!-- Both items valid -->
 
-          <div style="display: block; flex-direction: column; align-items: center; justify-content: space-evenly;" >
-            <ion-button color="success" size="full" shape="round"  [disabled]="!form.valid" (click)="login()">Login</ion-button>
-            <ion-button color="warning" size="full" shape="round" fill="clear" (click)="routeToRegister()">Create an Account</ion-button>
-          </div>
+          <ion-button style="margin-top: 10px;" color="success" size="full" shape="round"  [disabled]="!form.valid" (click)="login()">Login</ion-button>
+          <ion-button style="margin-top: 10px;" color="danger" size="full" shape="round" fill="clear" (click)="cancel()">Go back</ion-button>
 
-          <ion-button color="primary" size="full" shape="round" fill="clear" [disabled]="!form.get('email')?.valid">Forgot password</ion-button>
           <!-- <a color="primary" size="full" shape="round" fill="clear">Forgot password</a> -->
 
           <ion-row>
@@ -75,6 +69,7 @@
               <img class="invert" src="../../assets/icon/logoufsm2.png">
             </ion-col>
           </ion-row>
+
         </ion-card-content>
       </form>
 

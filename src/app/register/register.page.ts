@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from './register.service';
+import { RegisterDTO, TokenDTO } from '../shared/auth.data.transfer.object';
+import { HttpResponse } from '@capacitor/core';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +21,8 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router  
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -35,6 +39,26 @@ export class RegisterPage implements OnInit {
 
   register(): void {
 
+    const register: RegisterDTO = {
+      firstName: this.form.get('firstName')?.value,
+      lastName: "",
+      email: this.form.get('email')?.value,
+      password: this.form.get('password')?.value,
+    }
+
+    console.log(register);
+
+    this.authService.register(register).subscribe({
+      next: (response: TokenDTO): void => {
+        console.log(response);
+        // this.tokenService.setTokens(response); // The token should be passed to AuthInterceptor
+        // this.handleSuccess();
+        this.router.navigate([`tabs/tab1`]);
+      },
+      error: (error: HttpResponse) => {
+        console.log(error);
+      }
+    });
   }
 
   routeToLogin(): void {
@@ -43,6 +67,7 @@ export class RegisterPage implements OnInit {
 }
 
 class RegisterPageForm {
+
   private formBuilder: FormBuilder;
 
   constructor(formBuilder: FormBuilder) {
@@ -51,60 +76,11 @@ class RegisterPageForm {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      fullName: [``, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      hostMail: [``, [Validators.required, Validators.email]],
-      phoneNum: [``, []],
-      password: [``, [Validators.required, Validators.minLength(5), Validators.maxLength(50), RegisterValidators.validatePattern, RegisterValidators.passwordLimiter]],
-      validate: [``, [Validators.required, Validators.minLength(5), Validators.maxLength(50), RegisterValidators.passwordTheSame]],
-      termsTimestamp: [false, [Validators.required]],
-      termsCheckbox: [false, [RegisterValidators.isRequired]],
-      consetCheckbox: [false, [RegisterValidators.isRequired]]
-
+      firstName: [``, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      lastName: [``, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      email: [``, [Validators.required, Validators.email,]],
+      password: [``, [Validators.required, Validators.minLength(5), Validators.maxLength(50),]],
+      validate: [``, [Validators.required, Validators.minLength(5), Validators.maxLength(50), ]],
     });
   }
-}
-
-class RegisterValidators {
-
-  static isRequired(control: AbstractControl) {
-    const term: string = control.value;
-    if (!term) return { acceptTerm: false }
-    return;
-  }
-
-  static passwordLimiter(minValue: number) {
-    return (control: AbstractControl) => {
-      const field = control.value;
-      if (field <= minValue) return { NotGreaterThan: { minValue: minValue } };
-      else return null
-    }
-  }
-
-  static validatePattern(control: FormControl) {
-    const password: string = control.value;
-
-    const hasNumericDigitRegex = "(?=.*[0-9])";
-    const hasLetterRegex = "(?:(?=.*[A-Z])|(?=.*[a-z]))";
-
-    let pattern = `^${hasNumericDigitRegex}${hasLetterRegex}`; // Combine regexes
-
-    if (!password.match(pattern)) {
-      return {
-        PasswordHasNotNumberOrString: true
-      };
-    }
-
-    return;
-  }
-
-  static passwordTheSame(control: AbstractControl) {
-
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password !== confirmPassword) {
-      control.get('confirmPassword')?.setErrors({ ConfirmPassword: true });
-    }
-  }
-
 }
