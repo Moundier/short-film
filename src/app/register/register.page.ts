@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
 
   public form!: FormGroup;
   public showPassword: boolean = true;
-
+  
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
