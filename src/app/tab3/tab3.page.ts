@@ -4,6 +4,8 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { register } from 'swiper/element/bundle';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TokenService } from '../app-state-manager/auth.token.service';
 
 register();
 
@@ -32,10 +34,27 @@ register();
 })
 export class Tab3Page implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  accountForm!: FormGroup;
+  secretsForm!: FormGroup;
+
+  constructor(
+    private modalController: ModalController,
+    private formBuilder: FormBuilder,
+    private tokenService: TokenService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.accountForm = new UserForms(this.formBuilder).accountCreateForm();
+    this.secretsForm = new UserForms(this.formBuilder).secretsCreateForm();
+
+    // Load user Preferences
     console.log('[Load] Tab 3');
+  }
+
+  logout(): void {
+    this.tokenService.removeToken();
+    this.router.navigate([`login`]);
   }
 
   async openModal(param: string): Promise<void> {
@@ -50,6 +69,35 @@ export class Tab3Page implements OnInit {
 
     (await modal).present();
   }
+}
+
+class UserForms {
+
+  private formBuilder: FormBuilder;
+
+  constructor(formBuilder: FormBuilder) {
+    this.formBuilder = formBuilder;
+  }
+
+  accountCreateForm(): FormGroup<any> {
+    return this.formBuilder.group({
+      email: [``, ],
+      firstName: [``,],
+      lastName: [``,],
+      password: [``,],
+      role: [``,],
+      termsAcceptedDate: [``,],
+      userId: [``,],
+    });
+  }  
+  
+  secretsCreateForm(): FormGroup<any> {
+    return this.formBuilder.group({
+      password: [``, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      confirmPassword: [``, [Validators.required, Validators.minLength(5), Validators.maxLength(50)]]
+    });
+  }
+
 }
 
 @Component({

@@ -8,8 +8,11 @@ import {
   IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem, 
 } from '@ionic/angular/standalone';
 
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Injectable, Injector, OnInit, ViewChild } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { Interaction } from '../shared/auth.data.transfer.object';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 register();
 
@@ -66,29 +69,29 @@ export class Tab1Page implements OnInit {
 
   handleTap(e: any, item: Data): void {
     switch (e) {
-      case Interaction.PLAY_STOP:
+      case Interaction.ACTION_PLAY_STOP:
         console.log(`PLAY_STOP`, item);
         break;
-      case Interaction.VOLUME:
+      case Interaction.ACTION_VOLUME:
         console.log(`VOLUME`, item);
         break;
-      case Interaction.LIKE:
+      case Interaction.ACTION_LIKE:
         console.log(`LIKE`, item);
         break;
-      case Interaction.DISLIKE:
+      case Interaction.ACTION_DISLIKE:
         console.log(`DISLIKE`, item);
         break;
-      case Interaction.COMMENT:
+      case Interaction.ACTION_COMMENT:
         console.log(`COMMENT`, item);
         break;
-      case Interaction.SHARE:
+      case Interaction.ACTION_SHARE:
         console.log(`SHARE`, item);
         break;
-      case Interaction.SEE_MORE_USER:
+      case Interaction.ACTION_SEE_MORE_USER:
         console.log(`SEE_MORE_ITEM`, item);
         break;
-      case Interaction.SEE_MORE_ITEM:
-        console.log(`SEE_MORE_ITEM`, item);
+      case Interaction.ACTION_OPTIONS:
+        console.log(`OPTIONS`, item);
         break;
     }
   }
@@ -164,20 +167,6 @@ export class Tab1Page implements OnInit {
 
 }
 
-enum Interaction {
-  IMAGE,
-  VOLUME,
-  PLAY_STOP,
-  LIKE,
-  DISLIKE,
-  COMMENT,
-  SHARE,
-  OPTIONS,
-  DOMAIN_DETAILS,
-  SEE_MORE_USER,
-  SEE_MORE_ITEM,
-}
-
 interface Data {
   owner: string;
   image: string;
@@ -186,4 +175,14 @@ interface Data {
   liked: number;
   disliked: number;
   comments: number;
+}
+
+@Injectable()
+class UserToInteractionsService {
+  
+  constructor(private http: HttpClient) { }
+
+  public saveInteraction<T>(): Observable<T> {
+    return this.http.post<T>(``, null);
+  }
 }

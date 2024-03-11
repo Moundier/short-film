@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { LoginDTO, TokenDTO } from "../shared/auth.data.transfer.object";
+import { LoginDTO, TokenResponse } from "../shared/auth.data.transfer.object";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(obj: LoginDTO): Observable<TokenDTO> {
-    return this.http.post<TokenDTO>(`${this.API}/auth/login`, obj);
+  login(req: LoginDTO): Observable<TokenResponse> {
+    return this.http.post<TokenResponse>(`${this.API}/auth/login`, req);
   }
   
 }

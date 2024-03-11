@@ -43,6 +43,18 @@
 
   <ion-list [inset]="true">
     <ion-item>
+
+      <ion-label>Logout</ion-label>
+
+      <div (click)="logout()" class="ion-activatable ripple-parent circle">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon color="danger" name="power"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-list [inset]="true">
+    <ion-item>
       <ion-textarea label="Comments" labelPlacement="floating" rows="3"></ion-textarea>
     </ion-item>
   </ion-list>
@@ -68,7 +80,8 @@
         </swiper-slide>
       }
     </swiper-container>
-
   </ion-list>
+
+
 
 </ion-content>

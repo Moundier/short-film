@@ -5,8 +5,9 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular/standalone';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorDTO, LoginDTO, TokenDTO } from '../shared/auth.data.transfer.object';
+import { LoginDTO, TokenResponse } from '../shared/auth.data.transfer.object';
 import { LoginService } from './login.service';
+import { TokenService } from '../app-state-manager/auth.token.service';
 
 @Component({
   selector: 'app-login',
@@ -22,10 +23,11 @@ export class LoginPage implements OnInit {
   showPassword: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
+    private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private toastService: ToastController
+    private toastController: ToastController,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
@@ -44,17 +46,28 @@ export class LoginPage implements OnInit {
     }
 
     this.loginService.login(credentials).subscribe({
-      next: (response: TokenDTO) => {
-        // const tokenParsed = this.tokenService.getTokenParsed(); 
-        // console.log(response.accessToken);
-        // console.log(tokenParsed);
-        // this.tokenService.setTokens(response);
+      next: (response: TokenResponse) => {
+        console.log(`Access`, response.accessToken);
+        console.log(`Refresh`, response.refreshToken)
+        this.tokenService.setTokens(response);
 
         console.log(response);
         this.router.navigate([`/tabs/tab1`]);
       },
-      error: (error: any) => {
-        // this.toastService.show("Error: " + JSON.stringify(error), true);
+      error: async (error: HttpErrorResponse) => {
+
+        const toast: Promise<HTMLIonToastElement> = this.toastController.create({
+          animated: true,
+          message: 'Error on purpose',
+          duration: 4000,
+          buttons: [{
+            role: 'cancel',
+            text: 'Dismiss'
+          }],
+        });
+
+        toast.then((e: HTMLIonToastElement) => e.present());
+
         console.log(error);
       }
     });
@@ -63,6 +76,7 @@ export class LoginPage implements OnInit {
   cancel(): void {
     this.router.navigate([`register`]);
   }
+
 }
 
 class LoginBuilderForm {
@@ -78,4 +92,5 @@ class LoginBuilderForm {
       password: [``, [Validators.required]]
     });
   };
+
 }

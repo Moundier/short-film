@@ -39,7 +39,7 @@
   
             <ion-row class="row_of_header" style="justify-content: space-between; width: 100%;">
               
-              <div (click)="handleTap(Interaction.PLAY_STOP, item)" class="ion-activatable ripple-parent circle">
+              <div (click)="handleTap(Interaction.ACTION_PLAY_STOP, item)" class="ion-activatable ripple-parent circle">
                 <ion-ripple-effect></ion-ripple-effect>
 
                 @if (isPlaying === false) { 
@@ -50,7 +50,7 @@
 
               </div>
   
-              <div (click)="handleTap(Interaction.VOLUME, item)" class="ion-activatable ripple-parent circle">
+              <div (click)="handleTap(Interaction.ACTION_VOLUME, item)" class="ion-activatable ripple-parent circle">
                 <ion-ripple-effect></ion-ripple-effect>
                 <ion-icon name="volume-high"></ion-icon>
               </div>
@@ -67,7 +67,7 @@
                     <ion-label style="margin-left: 10px; margin-right: 10px;">{{ item.owner }}</ion-label>
                   </div>
   
-                  <ion-button (click)="handleTap(Interaction.SEE_MORE_ITEM, item)" class="see_more"
+                  <ion-button (click)="handleTap(Interaction.ACTION_SEE_MORE_ITEM, item)" class="see_more"
                     style="text-transform: none; font-size: 12px;" size="small" shape="round">See more</ion-button>
                 </ion-row>
   
@@ -78,31 +78,31 @@
   
               <ion-col class="control_panel" size="auto">
   
-                <div (click)="handleTap(Interaction.LIKE, item)" class="ion-activatable ripple-parent circle">
+                <div (click)="handleTap(Interaction.ACTION_LIKE, item)" class="ion-activatable ripple-parent circle">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-icon name="thumbs-up-sharp"></ion-icon>
                 </div>
                 <ion-label>10K</ion-label>
     
-                <div (click)="handleTap(Interaction.DISLIKE, item)" class="ion-activatable ripple-parent circle">
+                <div (click)="handleTap(Interaction.ACTION_DISLIKE, item)" class="ion-activatable ripple-parent circle">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-icon name="thumbs-down-sharp"></ion-icon>
                 </div>
                 <ion-label>Dislike</ion-label>
     
-                <div (click)="handleTap(Interaction.COMMENT, item)" class="ion-activatable ripple-parent circle">
+                <div (click)="handleTap(Interaction.ACTION_COMMENT, item)" class="ion-activatable ripple-parent circle">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-icon name="chatbox-sharp"></ion-icon>
                 </div>
                 <ion-label>532</ion-label>
     
-                <div (click)="handleTap(Interaction.SHARE, item)" class="ion-activatable ripple-parent circle">
+                <div (click)="handleTap(Interaction.ACTION_SHARE, item)" class="ion-activatable ripple-parent circle">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-icon name="share-social-sharp"></ion-icon>
                 </div>
                 <ion-label>Share</ion-label>
     
-                <div class="ion-activatable ripple-parent circle">
+                <div (click)="handleTap(Interaction.ACTION_OPTIONS, item)" class="ion-activatable ripple-parent circle">
                   <ion-ripple-effect></ion-ripple-effect>
                   <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
                 </div>

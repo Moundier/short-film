@@ -35,3 +35,23 @@ div.warning {
   padding-left: 20px;
   padding-right: 10px;
 }
+
+/* Button */
+
+.circle {
+  position: re;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: rgba($color: #444444, $alpha: 1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+  background-color: #575757;
+}

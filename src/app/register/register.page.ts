@@ -4,7 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Reac
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from './register.service';
-import { RegisterDTO, TokenDTO } from '../shared/auth.data.transfer.object';
+import { RegisterDTO, TokenResponse } from '../shared/auth.data.transfer.object';
 import { HttpResponse } from '@capacitor/core';
 
 @Component({
@@ -33,10 +33,6 @@ export class RegisterPage implements OnInit {
     this.showPassword = !this.showPassword; // show and hide password
   }
 
-  // hashPassword(password: string): string {
-  //   return crypto.SHA256(password).toString(crypto.enc.hex);
-  // }
-
   register(): void {
 
     const register: RegisterDTO = {
@@ -49,7 +45,7 @@ export class RegisterPage implements OnInit {
     console.log(register);
 
     this.authService.register(register).subscribe({
-      next: (response: TokenDTO): void => {
+      next: (response: TokenResponse): void => {
         console.log(response);
         // this.tokenService.setTokens(response); // The token should be passed to AuthInterceptor
         // this.handleSuccess();
@@ -67,7 +63,7 @@ export class RegisterPage implements OnInit {
 }
 
 class RegisterPageForm {
-
+  
   private formBuilder: FormBuilder;
 
   constructor(formBuilder: FormBuilder) {

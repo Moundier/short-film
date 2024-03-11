@@ -24,5 +24,7 @@ Search for: how to implement ion slides in ionic
 - `Implement user session`
 - `Implement cookies instead of localstorage`
 
-
+### State manager
+- The interceptor intercepts any request, and sends the token in the authHeader
+- The authGuard prevents or allows access dending if tokens are in the localstorage
 
