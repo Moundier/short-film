@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
-  }  
+  }
 
   login(): void {
 
@@ -47,11 +47,8 @@ export class LoginPage implements OnInit {
 
     this.loginService.login(credentials).subscribe({
       next: (response: TokenResponse) => {
-        console.log(`Access`, response.accessToken);
-        console.log(`Refresh`, response.refreshToken)
-        this.tokenService.setTokens(response);
-
         console.log(response);
+        this.tokenService.setTokens(response);
         this.router.navigate([`/tabs/tab1`]);
       },
       error: async (error: HttpErrorResponse) => {
