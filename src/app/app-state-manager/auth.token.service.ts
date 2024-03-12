@@ -60,6 +60,23 @@ export class TokenService {
     return this.http.post<TokenResponse>(`${this.API}/auth/refresh-token`, null);
   }
 
+  setRefreshedToken(): void {
+
+    let tokenResponse: TokenResponse = {
+      accessToken: '', 
+      refreshToken: ''
+    };
+
+    this.getRefreshedToken().subscribe({
+      next: (response: TokenResponse) => {
+        this.removeToken();
+        tokenResponse = response;
+        this.setTokens(tokenResponse);
+      },
+      error: (error: HttpErrorResponse) => { console.log(error.status); }
+    });
+  }
+
   tokenValid(token: string): boolean {
 
     const decodeToken: JwtPayload | null = jwtDecode(token)
@@ -78,6 +95,7 @@ export class TokenService {
 
     let accessTokenValid: boolean = false;
     let refreshTokenValid: boolean = false;
+    const sessionHasFinished = (!accessTokenValid && !refreshTokenValid); 
 
     if (accessToken && refreshToken) {
       accessTokenValid = this.tokenValid(accessToken);
@@ -85,47 +103,26 @@ export class TokenService {
     }
 
     if (accessTokenValid) {
-      console.log(`INFO: Token not expired. Continue navigation.`);
-      // TODO: redirect to tabs
-      return true; // NOTE: allow access to tabs pages
+      console.log(`(Token): access not expired. Continue navigation.`);
+      return true; // Note: keep allowing access 
     }
 
     if (refreshTokenValid) {
-
-      console.log(`(INFO) Access Token expired. Refresh Token refreshed Access Token.`); 
-      
-      let tokenDTO: TokenResponse = {
-        accessToken: '', 
-        refreshToken: ''
-      };
-
-      // ERROR: make const again, not let
-
-      this.getRefreshedToken().subscribe({
-        next: (response: TokenResponse) => {
-          tokenDTO = response;
-          console.log(`Refresh: ${JSON.stringify(tokenDTO)}`);
-
-          this.removeToken();
-          this.setTokens(tokenDTO);
-        },
-        error: (error: HttpErrorResponse) => console.log(error.status)
-      });
-
-      return true; // NOTE: allow access to tabs pages
+      this.setRefreshedToken();
+      console.log(`(Token) access token expired. Refresh access token.`); 
+      return true; // Note: allow access to tabs pages
     }
 
-    if (!accessTokenValid && !refreshTokenValid) {
-      console.log(`(INFO) Tokens have expired. Session is terminated`); // NOTE: session logout
+    if (sessionHasFinished) {
+      console.log(`(INFO) Tokens have expired. Session is terminated`); // Note: automatic logout
+      this.router.navigate([`login`]);
       localStorage.removeItem(environment.session_key);
-      // TODO: perform session logout
-      // TODO: session expired message
-      return false; // NOTE: returns to login page
+      return false; // Note: returns to login page
     }
 
-    this.router.navigate([`login`]); // NOTE: perform logout 
+    // this.router.navigate([`login`]); // NOTE: perform logout 
 
-    return false; // INFO: just default value
+    return false; // Note: default return
   }
 
 }
