@@ -9,6 +9,9 @@ import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { TokenResponse } from "../shared/auth.data.transfer.object";
 
+
+import { ToastController } from '@ionic/angular/standalone';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +20,8 @@ export class TokenService {
   constructor(
     private store: Store<AuthState>,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toast: ToastController
   ) { }
 
   getTokens(): string | null {
@@ -117,12 +121,29 @@ export class TokenService {
       console.log(`(INFO) Tokens have expired. Session is terminated`); // Note: automatic logout
       this.router.navigate([`login`]);
       localStorage.removeItem(environment.session_key);
+      this.showErrorToast(`Tokens have expired. Session is terminated`);
       return false; // Note: returns to login page
     }
 
     // this.router.navigate([`login`]); // NOTE: perform logout 
 
     return false; // Note: default return
+  }
+
+  private showErrorToast(str: string) {
+
+    const toast: Promise<HTMLIonToastElement> = this.toast.create({
+      animated: true,
+      message: `${str}`,
+      duration: 4000,
+      buttons: [{
+        role: 'cancel',
+        text: 'Dismiss'
+      }],
+      color: 'danger'
+    });
+
+    toast.then((e: HTMLIonToastElement) => e.present());
   }
 
 }

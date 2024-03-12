@@ -22,7 +22,10 @@
 </ion-header>
 
 <ion-content>
-  <swiper-container (swiperslidechange)="swiperSlideChange($event)" class="vertical_swiper" direction="vertical">
+  <swiper-container 
+    (swiperslidechange)="swiperSlideChange($event)" 
+    (slidechange)="event($event)"
+    class="vertical_swiper" direction="vertical">
 
     @for (item of list; track $index) {
 
@@ -42,7 +45,7 @@
               <div (click)="handleTap(Interaction.ACTION_PLAY_STOP, item)" class="ion-activatable ripple-parent circle">
                 <ion-ripple-effect></ion-ripple-effect>
 
-                @if (isPlaying === false) { 
+                @if (isVideoPlaying === false) { 
                   <ion-icon name="play-sharp"></ion-icon>
                 } @else {
                   <ion-icon  name="pause-sharp"></ion-icon>
@@ -78,29 +81,46 @@
   
               <ion-col class="control_panel" size="auto">
   
-                <div (click)="handleTap(Interaction.ACTION_LIKE, item)" class="ion-activatable ripple-parent circle">
-                  <ion-ripple-effect></ion-ripple-effect>
-                  <ion-icon name="thumbs-up-sharp"></ion-icon>
-                </div>
-                <ion-label>10K</ion-label>
-    
-                <div (click)="handleTap(Interaction.ACTION_DISLIKE, item)" class="ion-activatable ripple-parent circle">
-                  <ion-ripple-effect></ion-ripple-effect>
-                  <ion-icon name="thumbs-down-sharp"></ion-icon>
-                </div>
-                <ion-label>Dislike</ion-label>
-    
-                <div (click)="handleTap(Interaction.ACTION_COMMENT, item)" class="ion-activatable ripple-parent circle">
-                  <ion-ripple-effect></ion-ripple-effect>
-                  <ion-icon name="chatbox-sharp"></ion-icon>
-                </div>
-                <ion-label>532</ion-label>
-    
-                <div (click)="handleTap(Interaction.ACTION_SHARE, item)" class="ion-activatable ripple-parent circle">
-                  <ion-ripple-effect></ion-ripple-effect>
-                  <ion-icon name="share-social-sharp"></ion-icon>
-                </div>
-                <ion-label>Share</ion-label>
+                @if (!showOptions) {
+                  <div (click)="handleTap(Interaction.ACTION_LIKE, item)" class="ion-activatable ripple-parent circle">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-icon name="thumbs-up-sharp"></ion-icon>
+                  </div>
+                  <ion-label>10K</ion-label>
+      
+                  <div (click)="handleTap(Interaction.ACTION_DISLIKE, item)" class="ion-activatable ripple-parent circle">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-icon name="thumbs-down-sharp"></ion-icon>
+                  </div>
+                  <ion-label>Dislike</ion-label>
+      
+                  <div (click)="handleTap(Interaction.ACTION_COMMENT, item)" class="ion-activatable ripple-parent circle">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-icon name="chatbox-sharp"></ion-icon>
+                  </div>
+                  <ion-label>532</ion-label>
+      
+                  <div (click)="handleTap(Interaction.ACTION_BOOKMARK, item)" class="ion-activatable ripple-parent circle">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-icon name="bookmark"></ion-icon>
+                  </div>
+                  <ion-label>Save</ion-label>
+                }
+
+                @if (showOptions) {
+
+                  <div (click)="handleTap(Interaction.ACTION_REPORT, item)" class="ion-activatable ripple-parent circle">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-icon name="alert-circle"></ion-icon>
+                  </div>
+                  <ion-label>Report</ion-label>
+
+                  <div (click)="handleTap(Interaction.ACTION_SHARE, item)" class="ion-activatable ripple-parent circle">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-icon name="share-social-sharp"></ion-icon>
+                  </div>
+                  <ion-label>Share</ion-label>
+                }
     
                 <div (click)="handleTap(Interaction.ACTION_OPTIONS, item)" class="ion-activatable ripple-parent circle">
                   <ion-ripple-effect></ion-ripple-effect>

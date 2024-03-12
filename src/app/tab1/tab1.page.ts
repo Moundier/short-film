@@ -2,10 +2,10 @@
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule } from '@angular/common';
 
-import { 
+import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow,
   IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect,
-  IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem, 
+  IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem,
 } from '@ionic/angular/standalone';
 
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Injectable, Injector, OnInit, ViewChild } from '@angular/core';
@@ -15,6 +15,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 register();
+
+type TypeInteraction = Interaction;
 
 @Component({
   selector: 'app-tab1',
@@ -51,10 +53,11 @@ register();
 })
 export class Tab1Page implements OnInit {
 
-  public Interaction = Interaction;
-  
-  @ViewChild('videoElement') videoElement: HTMLVideoElement | undefined;
-  isPlaying: boolean = false;
+  public isVideoPlaying: boolean = false;
+  public showOptions: boolean = false;
+  public Interaction: typeof Interaction = Interaction;
+
+  @ViewChild('videoElement') public videoElement: HTMLVideoElement | undefined;
 
   constructor() { }
 
@@ -64,6 +67,10 @@ export class Tab1Page implements OnInit {
   }
 
   swiperSlideChange(e: any): void {
+    console.log(e);
+  }
+
+  event(e: any) {
     console.log(e);
   }
 
@@ -84,38 +91,35 @@ export class Tab1Page implements OnInit {
       case Interaction.ACTION_COMMENT:
         console.log(`COMMENT`, item);
         break;
-      case Interaction.ACTION_SHARE:
-        console.log(`SHARE`, item);
+      case Interaction.ACTION_BOOKMARK:
+        console.log(`ACTION_BOOKMARK`, item);
         break;
       case Interaction.ACTION_SEE_MORE_USER:
         console.log(`SEE_MORE_ITEM`, item);
         break;
       case Interaction.ACTION_OPTIONS:
         console.log(`OPTIONS`, item);
+        this.showOptions = !this.showOptions;
+        break;
+      case Interaction.ACTION_REPORT:
+        console.log(`REPORT`, item);
+        break;
+      case Interaction.ACTION_SHARE:
+        console.log(`SHARE`, item);
         break;
     }
   }
 
-  private onPlay(): void {
-    this.isPlaying = true;
-    console.log(`[Video context] Playing`);
-  }
-
-  private onPause(): void {
-    this.isPlaying = false;
-    console.log(`[Video context] Paused`)
-  }
-
   public toggleVideo(video: HTMLVideoElement): void {
 
-    if (video.paused) {
+    const videoIsPaused: boolean = video.paused;
+    this.isVideoPlaying = video ? true : false;
+
+    if (videoIsPaused) {
       video.play();
-      this.onPlay();
-    } else {
-      video.pause();
-      this.onPause();
-    };
+    } else video.pause();
   }
+
 
   list: Data[] = [
     {
@@ -170,8 +174,8 @@ export class Tab1Page implements OnInit {
 interface Data {
   owner: string;
   image: string;
-  domain:  string;
-  domainImage:  string;
+  domain: string;
+  domainImage: string;
   liked: number;
   disliked: number;
   comments: number;
@@ -179,8 +183,10 @@ interface Data {
 
 @Injectable()
 class UserToInteractionsService {
-  
-  constructor(private http: HttpClient) { }
+
+  constructor(
+    private http: HttpClient
+  ) { }
 
   public saveInteraction<T>(): Observable<T> {
     return this.http.post<T>(``, null);

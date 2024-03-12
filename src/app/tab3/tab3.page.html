@@ -38,13 +38,12 @@
         <ion-note color="medium">Toggle the button to switch themes</ion-note>
       </ion-toggle>
     </ion-item>
-    
-  </ion-list>
 
-  <ion-list [inset]="true">
     <ion-item>
-
-      <ion-label>Logout</ion-label>
+      <ion-label>
+        <h2>Adios for Now</h2>
+        <p>We hope you enjoyied your session! Be back soon!</p>
+      </ion-label>
 
       <div (click)="logout()" class="ion-activatable ripple-parent circle">
         <ion-ripple-effect></ion-ripple-effect>
@@ -52,6 +51,7 @@
       </div>
     </ion-item>
   </ion-list>
+
 
   <ion-list [inset]="true">
     <ion-item>
