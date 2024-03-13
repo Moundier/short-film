@@ -5,7 +5,7 @@ import { register } from 'swiper/element/bundle';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TokenService } from '../app-state-manager/auth.token.service';
+import { TokenService } from '../blueprint/auth.token.service';
 
 register();
 

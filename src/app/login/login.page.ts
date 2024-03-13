@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular/standalone';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginDTO, TokenResponse } from '../shared/auth.data.transfer.object';
 import { LoginService } from './login.service';
-import { TokenService } from '../app-state-manager/auth.token.service';
+import { TokenService } from '../blueprint/auth.token.service';
 
 @Component({
   selector: 'app-login',

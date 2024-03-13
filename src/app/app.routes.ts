@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './app-state-manager/auth.guard';
-import { TabsPage } from './tabs/tabs.page';
-import { LoginPage } from './login/login.page';
+import { authGuard } from './blueprint/auth.guard';
 
 export const routes: Routes = [
   

@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import * as AuthActions from './auth.actions';
-import { AuthState } from "./auth.reducer";
 import { environment } from "./environment";
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
@@ -18,7 +16,6 @@ import { ToastController } from '@ionic/angular/standalone';
 export class TokenService {
 
   constructor(
-    private store: Store<AuthState>,
     private http: HttpClient,
     private router: Router,
     private toast: ToastController
@@ -30,12 +27,10 @@ export class TokenService {
 
   setTokens(tokens: TokenResponse): void {
     localStorage.setItem(environment.session_key, JSON.stringify(tokens));
-    this.store.dispatch(AuthActions.register({ tokens }));
   }
 
   removeToken(): void {
     localStorage.removeItem(environment.session_key);
-    this.store.dispatch(AuthActions.logout());
   }
 
   getTokenParsed(): TokenResponse | null {
