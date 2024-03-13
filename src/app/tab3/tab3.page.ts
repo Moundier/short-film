@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from '../blueprint/auth.token.service';
+import { LoginService } from '../login/login.service';
+import { UserModel } from '../shared/auth.data.transfer.object';
 
 register();
 
@@ -41,7 +43,9 @@ export class Tab3Page implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService,
+    
   ) { }
 
   ngOnInit(): void {

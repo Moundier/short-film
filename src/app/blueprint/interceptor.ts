@@ -3,8 +3,10 @@ import { inject } from "@angular/core";
 import { TokenService } from "./auth.token.service";
 import { JwtPayload } from "jwt-decode";
 
-export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
+export let authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   console.log('Auth interceptor...');
+
+  // If valid, send access token in header; else, send refresh 
 
   const tokenService: TokenService = inject(TokenService);
 

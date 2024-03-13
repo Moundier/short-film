@@ -8,7 +8,7 @@ import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor, } from './app/blueprint/interceptor';
-import { StateService } from './app/blueprint/state.service';
+import { UserStore } from './app/blueprint/user.store.service';
 
 if (environment.production) {
   enableProdMode();
@@ -17,7 +17,7 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
-    { provide: StateService, useClass: StateService, },
+    { provide: UserStore, useClass: UserStore, },
     importProvidersFrom(HttpClientModule),
     provideIonicAngular(),
     provideRouter(routes),

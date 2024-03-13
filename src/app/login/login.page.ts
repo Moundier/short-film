@@ -4,10 +4,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular/standalone';
-import { HttpErrorResponse } from '@angular/common/http';
-import { LoginDTO, TokenResponse } from '../shared/auth.data.transfer.object';
+import { HttpErrorResponse, HttpHeaders, } from '@angular/common/http';
+import { LoginDTO, TokenResponse, UserModel } from '../shared/auth.data.transfer.object';
 import { LoginService } from './login.service';
 import { TokenService } from '../blueprint/auth.token.service';
+import { UserStore } from '../blueprint/user.store.service';
+import { concatMap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +29,8 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private toastController: ToastController,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private userStore: UserStore,
   ) { }
 
   ngOnInit() {
@@ -45,32 +48,52 @@ export class LoginPage implements OnInit {
       password: this.form.get('password')?.value,
     }
 
-    this.loginService.login(credentials).subscribe({
-      next: (response: TokenResponse) => {
-        console.log(response);
-        this.tokenService.setTokens(response);
-        this.router.navigate([`/tabs/tab1`]);
-      },
-      error: async (error: HttpErrorResponse) => {
+    let headers: HttpHeaders = new HttpHeaders({});
 
-        const toast: Promise<HTMLIonToastElement> = this.toastController.create({
-          animated: true,
-          message: 'Error on purpose',
-          duration: 4000,
-          buttons: [{
-            role: 'cancel',
-            text: 'Dismiss'
-          }],
+    this.loginService.login(credentials)
+    .pipe(
+      concatMap((response: TokenResponse) => {
+        this.tokenService.setTokens(response);
+
+        headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${response.accessToken}`
         });
 
-        toast.then((e: HTMLIonToastElement) => e.present());
-
+        return this.loginService.getUser(headers);
+      })
+    )
+    .subscribe({
+      next: (user: UserModel) => {
+        // Store service 
+        this.userStore.setUserState(user); 
+        this.router.navigate(['/tabs/tab1']);
+        console.log(user);
+      },
+      error: (error: any) => {
+        this.showErrorToast(error.message);
         console.log(error);
       }
     });
   }
 
-  cancel(): void {
+  private showErrorToast(str: string) {
+
+    const toast: Promise<HTMLIonToastElement> = this.toastController.create({
+      animated: true,
+      message: `${str}`,
+      duration: 4000,
+      buttons: [{
+        role: 'cancel',
+        text: 'Dismiss'
+      }],
+      color: 'danger'
+    });
+
+    toast.then((e: HTMLIonToastElement) => e.present());
+  } 
+
+  public cancel(): void {
     this.router.navigate([`register`]);
   }
 

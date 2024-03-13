@@ -5,24 +5,23 @@ import { UserModel } from "../shared/auth.data.transfer.object";
 @Injectable({
   providedIn: 'root'
 })
-export class StateService {
+export class UserStore {
 
   private userState: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>({});
 
-  constructor() { }
-
-  getUserState(): any {
-
+  getUserState(): UserModel {
+    console.log(this.userState.getValue());
+    return this.userState.getValue();
   }
 
-  setUserState(state: any): void {
-    this.userState.next(state);  
+  setUserState(nextState: UserModel): void {
+    // console.log(nextState);
+    this.userState.next(nextState);  
   }
 
-  mixUserState(partialState: Partial<any>) {
+  mixUserState(partialState: Partial<UserModel>) {
+    console.log(partialState);
     const currentState = this.getUserState();
     this.setUserState({ ...currentState, ...partialState });
   }
-
-
 }
