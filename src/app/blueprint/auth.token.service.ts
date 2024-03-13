@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { environment } from "./environment";
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { TokenResponse } from "../shared/auth.data.transfer.object";
-
 
 import { ToastController } from '@ionic/angular/standalone';
 
@@ -119,8 +117,6 @@ export class TokenService {
       this.showErrorToast(`Tokens have expired. Session is terminated`);
       return false; // Note: returns to login page
     }
-
-    // this.router.navigate([`login`]); // NOTE: perform logout 
 
     return false; // Note: default return
   }
