@@ -7,10 +7,9 @@ import { UserModel } from "../shared/auth.data.transfer.object";
 })
 export class UserStore {
 
-  private userState: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>({});
+  public userState: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>({});
 
   getUserState(): UserModel {
-    console.log(this.userState.getValue());
     return this.userState.getValue();
   }
 

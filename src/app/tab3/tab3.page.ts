@@ -70,6 +70,9 @@ export class Tab3Page implements OnInit, AfterViewChecked {
   }
 
   async openModal(param: string): Promise<void> {
+
+    console.log(this.userStore.getUserState());
+
     let modal = this.modalController.create({
       component: Modal,
       componentProps: {
