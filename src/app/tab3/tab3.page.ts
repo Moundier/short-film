@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonInput, IonToggle, IonLabel, IonNote, IonTextarea, IonThumbnail, ModalController } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { register } from 'swiper/element/bundle';
@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from '../blueprint/auth.token.service';
 import { LoginService } from '../login/login.service';
 import { UserModel } from '../shared/auth.data.transfer.object';
+import { Subscription } from 'rxjs';
+import { UserStore } from '../blueprint/user.store.service';
 
 register();
 
@@ -34,18 +36,19 @@ register();
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class Tab3Page implements OnInit {
+export class Tab3Page implements OnInit, AfterViewChecked {
 
   accountForm!: FormGroup;
   secretsForm!: FormGroup;
+
+  userModel!: UserModel;
 
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private tokenService: TokenService,
     private router: Router,
-    private loginService: LoginService,
-    
+    private userStore: UserStore
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +57,11 @@ export class Tab3Page implements OnInit {
 
     // Load user Preferences
     console.log('[Load] Tab 3');
+
+  }
+
+  ngAfterViewChecked(): void {
+    this.userModel = this.userStore.getUserState();    
   }
 
   logout(): void {
