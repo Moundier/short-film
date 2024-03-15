@@ -11,8 +11,10 @@ import {
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Injectable, Injector, OnInit, ViewChild } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { Interaction } from '../shared/auth.data.transfer.object';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Page } from './page';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 register();
 
@@ -58,6 +60,8 @@ export class Tab1Page implements OnInit {
   public Interaction: typeof Interaction = Interaction;
 
   @ViewChild('videoElement') public videoElement: HTMLVideoElement | undefined;
+
+  public programsState!: Observable<{ state: string; data: HttpResponse<Page>, error: HttpErrorResponse }>;
 
   constructor() { }
 
@@ -121,6 +125,7 @@ export class Tab1Page implements OnInit {
   }
 
 
+
   list: Data[] = [
     {
       owner: "John Doe",
@@ -168,8 +173,9 @@ export class Tab1Page implements OnInit {
       comments: 30
     },
   ];
-
 }
+
+
 
 interface Data {
   owner: string;
@@ -181,12 +187,57 @@ interface Data {
   comments: number;
 }
 
-@Injectable()
+export interface ProgramEntity {
+  programId: number;
+  imageSource: string;
+  domainImageSource: string;
+  title: string;
+  numberUnique: string;
+  classification: string;
+  summary: string;
+  objectives: string;
+  defense: string;
+  results: string;
+  dateStart: string;
+  dateFinal: string;
+  status: string;
+  hyperlink: string;
+}
+
+export interface HttpResponse<T> {
+  timestamp: string;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: { page: T };
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+class ProgramEntityService {
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  private API: string = 'http://localhost:9090';
+
+  public findPrograms(title: string = '', page = 0, size = 10): Observable<HttpResponse<Page>> {
+    return this.http.get<HttpResponse<Page>>(`${this.API}/programs?title=${title}&page=${page}&size=${size}`);
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
 class UserToInteractionsService {
 
   constructor(
     private http: HttpClient
   ) { }
+
+  private API: string = 'http://localhost:9090';
 
   public saveInteraction<T>(): Observable<T> {
     return this.http.post<T>(``, null);
