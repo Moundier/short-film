@@ -1,8 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Injectable, ViewChild } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonCol, IonRow, IonChip, IonAvatar, IonImg, IonLabel, IonText, IonIcon, IonButton, IonButtons, IonBackButton, IonMenuButton, IonRippleEffect, IonPopover, IonList, IonItem } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule } from '@angular/common';
 import { register } from 'swiper/element/bundle';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { compassSharp } from 'ionicons/icons';
 
 register();
 
@@ -99,14 +102,9 @@ export class Tab2Page {
     }
   ];
 
-
   public selectedButton: string | null = null;
 
-  constructor() { }
-
-  redirect(): void {
-
-  }
+  constructor(private keywordEntityService: KeywordEntityService) { }
 
   processString(inputStr?: string): string {
     if (inputStr === undefined) {
@@ -123,24 +121,62 @@ export class Tab2Page {
     }
   }
 
+  findBookmark(): void {
+    console.log(`Found bookmark`);
+  }
+
   wipeBookmark(): void {
-    console.log('Click');
-  }
-
-  getUniqueTopics(): any[] {
-    return [];
-  }
-
-  selectTopic(item: any): void {
-
-  }
-
-  getFilteredFavorites(): any[] {
-    return [];
+    console.log('Delete click');
   }
 
   openModal(): void {
 
   }
 
+  data: any[] = [];
+  loading: boolean = false;
+  pageNumber: number = 0;
+  pageSize: number = 20;
+
+  findAllKeywordPaginated(): Observable<any> {
+    return this.keywordEntityService.findAllKeywordsPaginated(this.pageNumber, this.pageSize);
+  }
+
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+class UserToPreferencesService {
+
+  private API: string = '';
+
+  constructor() {  }
+
+  public saveInteraction(userId: number, programId: number): void {
+    
+    return;
+  }
+
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+class KeywordEntityService {
+  
+  constructor(private http: HttpClient) {  }
+
+  private API: string = 'user_to_preferences';
+
+  // Put these on component
+
+  public findAllKeywordsPaginated(pageNumber: number = 0, pageSize: number = 20): Observable<any> {
+    
+    let params: HttpParams = new HttpParams()
+    .set(`pageNumber`, pageNumber.toString())
+    .set(`pageSize`, pageSize.toString());
+    
+    return this.http.get<any>(`${this.API}`, { params });
+  }
 }

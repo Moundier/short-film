@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { LoginDTO, TokenResponse, UserModel } from "../shared/auth.data.transfer.object";
-import { options } from "ionicons/icons";
 
 @Injectable({
   providedIn: 'root'

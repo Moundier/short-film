@@ -8,13 +8,12 @@ import {
   IonLabel, IonImg, IonAvatar, IonChip, IonText, IonPopover, IonList, IonItem,
 } from '@ionic/angular/standalone';
 
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Injectable, Injector, OnInit, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { Interaction } from '../shared/auth.data.transfer.object';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from './page';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 register();
 
@@ -115,7 +114,6 @@ export class Tab1Page implements OnInit {
   }
 
   public toggleVideo(video: HTMLVideoElement): void {
-
     const videoIsPaused: boolean = video.paused;
     this.isVideoPlaying = video ? true : false;
 
@@ -123,8 +121,6 @@ export class Tab1Page implements OnInit {
       video.play();
     } else video.pause();
   }
-
-
 
   list: Data[] = [
     {
@@ -174,8 +170,6 @@ export class Tab1Page implements OnInit {
     },
   ];
 }
-
-
 
 interface Data {
   owner: string;
@@ -241,5 +235,29 @@ class UserToInteractionsService {
 
   public saveInteraction<T>(): Observable<T> {
     return this.http.post<T>(``, null);
+  }
+}
+
+class UserToPreferencesService {
+
+
+  private API: string = '';
+}
+
+class KeywordEntityService {
+  
+  constructor(private http: HttpClient) {  }
+
+  private API: string = 'user_to_preferences';
+
+  // Put these on component
+
+  public findAllKeywordsPaginated(pageNumber: number = 0, pageSize: number = 20): Observable<any> {
+    
+    let params: HttpParams = new HttpParams()
+    .set(`pageNumber`, pageNumber.toString())
+    .set(`pageSize`, pageSize.toString());
+    
+    return this.http.get<any>(`${this.API}`, { params });
   }
 }
