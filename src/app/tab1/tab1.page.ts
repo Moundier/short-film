@@ -238,26 +238,3 @@ class UserToInteractionsService {
   }
 }
 
-class UserToPreferencesService {
-
-
-  private API: string = '';
-}
-
-class KeywordEntityService {
-  
-  constructor(private http: HttpClient) {  }
-
-  private API: string = 'user_to_preferences';
-
-  // Put these on component
-
-  public findAllKeywordsPaginated(pageNumber: number = 0, pageSize: number = 20): Observable<any> {
-    
-    let params: HttpParams = new HttpParams()
-    .set(`pageNumber`, pageNumber.toString())
-    .set(`pageSize`, pageSize.toString());
-    
-    return this.http.get<any>(`${this.API}`, { params });
-  }
-}
