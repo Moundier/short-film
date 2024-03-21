@@ -6,7 +6,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   
   // Prevents or Allows Access
 
-  const isDeactivated: boolean = false;
+  const isDeactivated: boolean = true;
 
   if (isDeactivated) {
     console.log(`(Guard) disabled for testing.`);

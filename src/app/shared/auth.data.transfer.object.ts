@@ -44,15 +44,7 @@ enum ErrorToken {
   INVALID_TOKEN = 'Access Denied',
 }
 
-export interface UserToInteractions {
-  userId?: number,
-  programId?: number,
-  date?: Date,
-  json?: string,
-  actionType?: Interaction
-}
-
-export enum Interaction {
+export enum InteractionType {
   ACTION_LIKE,
   ACTION_DISLIKE,
   ACTION_RATING,

@@ -10,14 +10,12 @@ import {
 
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { register } from 'swiper/element/bundle';
-import { Interaction } from '../shared/auth.data.transfer.object';
+import { InteractionType, UserModel } from '../shared/auth.data.transfer.object';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Page } from './page';
+import { UserStore } from '../blueprint/user.store.service';
 
 register();
-
-type TypeInteraction = Interaction;
 
 @Component({
   selector: 'app-tab1',
@@ -54,13 +52,12 @@ type TypeInteraction = Interaction;
 })
 export class Tab1Page implements OnInit {
 
-  public isVideoPlaying: boolean = false;
+  public isTutorialComplete: boolean = false;
+  public isPlayingVideo: boolean = false;
   public showOptions: boolean = false;
-  public Interaction: typeof Interaction = Interaction;
+  public InteractionType: typeof InteractionType = InteractionType;
 
   @ViewChild('videoElement') public videoElement: HTMLVideoElement | undefined;
-
-  public programsState!: Observable<{ state: string; data: HttpResponse<Page>, error: HttpErrorResponse }>;
 
   constructor() { }
 
@@ -69,45 +66,45 @@ export class Tab1Page implements OnInit {
     this.videoElement?.play
   }
 
-  swiperSlideChange(e: any): void {
+  public swiperSlideChange(e: any): void {
     console.log(e);
   }
 
-  event(e: any) {
+  public event(e: any) {
     console.log(e);
   }
 
-  handleTap(e: any, item: Data): void {
+  public handleTap(e: any, item: Data): void {
     switch (e) {
-      case Interaction.ACTION_PLAY_STOP:
+      case InteractionType.ACTION_PLAY_STOP:
         console.log(`PLAY_STOP`, item);
         break;
-      case Interaction.ACTION_VOLUME:
+      case InteractionType.ACTION_VOLUME:
         console.log(`VOLUME`, item);
         break;
-      case Interaction.ACTION_LIKE:
+      case InteractionType.ACTION_LIKE:
         console.log(`LIKE`, item);
         break;
-      case Interaction.ACTION_DISLIKE:
+      case InteractionType.ACTION_DISLIKE:
         console.log(`DISLIKE`, item);
         break;
-      case Interaction.ACTION_COMMENT:
+      case InteractionType.ACTION_COMMENT:
         console.log(`COMMENT`, item);
         break;
-      case Interaction.ACTION_BOOKMARK:
+      case InteractionType.ACTION_BOOKMARK:
         console.log(`ACTION_BOOKMARK`, item);
         break;
-      case Interaction.ACTION_SEE_MORE_USER:
+      case InteractionType.ACTION_SEE_MORE_USER:
         console.log(`SEE_MORE_ITEM`, item);
         break;
-      case Interaction.ACTION_OPTIONS:
+      case InteractionType.ACTION_OPTIONS:
         console.log(`OPTIONS`, item);
         this.showOptions = !this.showOptions;
         break;
-      case Interaction.ACTION_REPORT:
+      case InteractionType.ACTION_REPORT:
         console.log(`REPORT`, item);
         break;
-      case Interaction.ACTION_SHARE:
+      case InteractionType.ACTION_SHARE:
         console.log(`SHARE`, item);
         break;
     }
@@ -115,11 +112,13 @@ export class Tab1Page implements OnInit {
 
   public toggleVideo(video: HTMLVideoElement): void {
     const videoIsPaused: boolean = video.paused;
-    this.isVideoPlaying = video ? true : false;
+    this.isPlayingVideo = video ? true : false;
 
     if (videoIsPaused) {
       video.play();
-    } else video.pause();
+    } else {
+      video.pause();
+    }
   }
 
   list: Data[] = [
@@ -198,43 +197,90 @@ export interface ProgramEntity {
   hyperlink: string;
 }
 
-export interface HttpResponse<T> {
-  timestamp: string;
-  statusCode: number;
-  status: string;
-  message: string;
-  data: { page: T };
-}
+// export interface HttpResponse<T> {
+//   timestamp: string;
+//   statusCode: number;
+//   status: string;
+//   message: string;
+//   data: { page: T };
+// }
 
 @Injectable({
   providedIn: 'root'
 })
-class ProgramEntityService {
+class ProgramService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   private API: string = 'http://localhost:9090';
 
-  public findPrograms(title: string = '', page = 0, size = 10): Observable<HttpResponse<Page>> {
-    return this.http.get<HttpResponse<Page>>(`${this.API}/programs?title=${title}&page=${page}&size=${size}`);
+  public findPrograms(page = 0, size = 10): Observable<ProgramEntity> {
+    return this.http.get<ProgramEntity>(`${this.API}/programs?page=${page}&size=${size}`);
   }
 }
 
 @Injectable({
   providedIn: 'root'
 })
-class UserToInteractionsService {
+class InteractionService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private userStore: UserStore,
   ) { }
-
+  
   private API: string = 'http://localhost:9090';
 
-  public saveInteraction<T>(): Observable<T> {
-    return this.http.post<T>(``, null);
+  public saveInteraction(actionType: ActionType, content: string, programId: number): void {
+    
+    let user: UserModel = this.userStore.getUserState();
+
+    const interactionModel: InteractionModel = {
+      // interactionId: 0,
+      actionType: actionType,
+      object: JSON.stringify(content),
+      user: user.userId,
+      program: programId,
+      date: new Date(0),
+    };
+
+    this.http.post<any>(`${this.API}/interaction`, interactionModel);
   }
+
+  public findExistsInteraction(userId: number, programId: number): boolean {
+    // Note: not found, then it is a save request
+    // Note: else found, then it is a putch request
+    return false;
+  }
+
+  public findInteractions() {
+
+  }
+
+  public editInteraction(actionType: ActionType, content: string, programId: number) {
+    return null;
+  }
+
 }
 
+interface InteractionModel {
+  interactionId?: number;
+  actionType?: ActionType;
+  object?: string; // Assuming object is stored as JSON string
+  user?: number;
+  program?: number;
+  date?: Date;
+}
+
+enum ActionType {
+  ACTION_LIKE,
+  ACTION_DISLIKE,
+  ACTION_RATING,
+  ACTION_SHARE,
+  ACTION_BOOKMARK,
+  ACTION_REPORT,
+  ACTION_DETAILS_TIME_SPENT, // Ignored by now
+  ACTION_COMMENT,
+}

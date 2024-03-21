@@ -21,121 +21,129 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <swiper-container 
-    (swiperslidechange)="swiperSlideChange($event)" 
-    (slidechange)="event($event)"
-    class="vertical_swiper" direction="vertical">
+@if (isTutorialComplete === false) {
 
-    @for (item of list; track $index) {
-
-      <swiper-slide>
-        <ion-grid>
-          <ion-row  class="slide_image">
-  
-            <img class="slide" [src]="item.image" alt="">
-            <!-- todo: fix the autoplay that doesn't autoplay somehow -->
-            <!-- todo: conditional display of either img or video -->
-<!--             
-            <div style="z-index: 1; position: absolute; width: 90%; height: 78%; margin-top: 60px; pointer-events: auto;" (click)="toggleVideo(videoElement)"></div>
-            <video #videoElement controls autoplay loop playsinline="" style="pointer-events: none;" src="../../assets/adobe-stock-sample.mp4"></video> -->
-  
-            <ion-row class="row_of_header" style="justify-content: space-between; width: 100%;">
-              
-              <div (click)="handleTap(Interaction.ACTION_PLAY_STOP, item)" class="ion-activatable ripple-parent circle">
-                <ion-ripple-effect></ion-ripple-effect>
-
-                @if (isVideoPlaying === false) { 
-                  <ion-icon name="play-sharp"></ion-icon>
-                } @else {
-                  <ion-icon  name="pause-sharp"></ion-icon>
-                }
-
-              </div>
-  
-              <div (click)="handleTap(Interaction.ACTION_VOLUME, item)" class="ion-activatable ripple-parent circle">
-                <ion-ripple-effect></ion-ripple-effect>
-                <ion-icon name="volume-high"></ion-icon>
-              </div>
-            </ion-row>
-  
-            <ion-row class="row_of_details" style="width: 100%; display: flex;">
-              
-              <ion-col style="display: flex; flex-direction: column; align-items: start; justify-content: flex-end; margin-left: 10px;">
-                <ion-row style="display: flex; align-items: center;">
-  
-                  <div class="row_of_user_more" style="display: flex; align-items: center;">
-                    <img style="border-radius: 50%;" class="group_image" alt="Silhouette of a person's head"
-                      src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                    <ion-label style="margin-left: 10px; margin-right: 10px;">{{ item.owner }}</ion-label>
-                  </div>
-  
-                  <ion-button (click)="handleTap(Interaction.ACTION_SEE_MORE_ITEM, item)" class="see_more"
-                    style="text-transform: none; font-size: 12px;" size="small" shape="round">See more</ion-button>
-                </ion-row>
-  
-                <ion-row style="margin-bottom: 20px;">
-                  <ion-label>Recommendation based system. Powered by LUMAC.</ion-label>
-                </ion-row>
-              </ion-col>
-  
-              <ion-col class="control_panel" size="auto">
-  
-                @if (!showOptions) {
-                  <div (click)="handleTap(Interaction.ACTION_LIKE, item)" class="ion-activatable ripple-parent circle">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-icon name="thumbs-up-sharp"></ion-icon>
-                  </div>
-                  <ion-label>10K</ion-label>
-      
-                  <div (click)="handleTap(Interaction.ACTION_DISLIKE, item)" class="ion-activatable ripple-parent circle">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-icon name="thumbs-down-sharp"></ion-icon>
-                  </div>
-                  <ion-label>Dislike</ion-label>
-      
-                  <div (click)="handleTap(Interaction.ACTION_COMMENT, item)" class="ion-activatable ripple-parent circle">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-icon name="chatbox-sharp"></ion-icon>
-                  </div>
-                  <ion-label>532</ion-label>
-      
-                  <div (click)="handleTap(Interaction.ACTION_BOOKMARK, item)" class="ion-activatable ripple-parent circle">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-icon name="bookmark"></ion-icon>
-                  </div>
-                  <ion-label>Save</ion-label>
-                }
-
-                @if (showOptions) {
-                  <div (click)="handleTap(Interaction.ACTION_REPORT, item)" class="ion-activatable ripple-parent circle">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-icon name="alert-circle"></ion-icon>
-                  </div>
-                  <ion-label>Report</ion-label>
-
-                  <div (click)="handleTap(Interaction.ACTION_SHARE, item)" class="ion-activatable ripple-parent circle">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-icon name="share-social-sharp"></ion-icon>
-                  </div>
-                  <ion-label>Share</ion-label>
-                }
+  <ion-content>
     
-                <div (click)="handleTap(Interaction.ACTION_OPTIONS, item)" class="ion-activatable ripple-parent circle">
+  </ion-content>
+
+} @else {
+
+  <ion-content>
+    <swiper-container 
+      (swiperslidechange)="swiperSlideChange($event)" 
+      (slidechange)="event($event)"
+      class="vertical_swiper" direction="vertical">
+  
+      @for (item of list; track $index) {
+  
+        <swiper-slide>
+          <ion-grid>
+            <ion-row  class="slide_image">
+    
+              <img class="slide" [src]="item.image" alt="">
+  
+              <!-- todo: fix the autoplay that doesn't autoplay somehow -->
+              <!-- <div style="z-index: 1; position: absolute; width: 90%; height: 78%; margin-top: 60px; pointer-events: auto;" (click)="toggleVideo(videoElement)"></div> -->
+              <!-- <video #videoElement controls autoplay loop playsinline="" style="pointer-events: none;" src="../../assets/adobe-stock-sample.mp4"></video> -->
+    
+              <ion-row class="row_of_header" style="justify-content: space-between; width: 100%;">
+                
+                <div (click)="handleTap(InteractionType.ACTION_PLAY_STOP, item)" class="ion-activatable ripple-parent circle">
                   <ion-ripple-effect></ion-ripple-effect>
-                  <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
+  
+                  @if (isPlayingVideo === false) { 
+                    <ion-icon name="play-sharp"></ion-icon>
+                  } @else {
+                    <ion-icon  name="pause-sharp"></ion-icon>
+                  }
                 </div>
     
-                <img class="image_domain" alt="Silhouette of a person's head"
-                  src="https://ionicframework.com/docs/img/demos/avatar.svg">
+                <div (click)="handleTap(InteractionType.ACTION_VOLUME, item)" class="ion-activatable ripple-parent circle">
+                  <ion-ripple-effect></ion-ripple-effect>
+                  <ion-icon name="volume-high"></ion-icon>
+                </div>
+              </ion-row>
     
-              </ion-col>
-            </ion-row>
-          </ion-row>
-        </ion-grid>
+              <ion-row class="row_of_details" style="width: 100%; display: flex;">
+                
+                <ion-col style="display: flex; flex-direction: column; align-items: start; justify-content: flex-end; margin-left: 10px;">
+                  <ion-row style="display: flex; align-items: center;">
+    
+                    <div class="row_of_user_more" style="display: flex; align-items: center;">
+                      <img style="border-radius: 50%;" class="group_image" alt=""
+                        src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                      <ion-label style="margin-left: 10px; margin-right: 10px;">{{ item.owner }}</ion-label>
+                    </div>
+    
+                    <ion-button (click)="handleTap(InteractionType.ACTION_SEE_MORE_ITEM, item)" class="see_more"
+                      style="text-transform: none; font-size: 12px;" size="small" shape="round">See more</ion-button>
+                  </ion-row>
+    
+                  <ion-row style="margin-bottom: 20px;">
+                    <ion-label>Recommendation based system. Powered by LUMAC.</ion-label>
+                  </ion-row>
+                </ion-col>
+    
+                <ion-col class="control_panel" size="auto">
+    
+                  @if (!showOptions) {
+                    <div (click)="handleTap(InteractionType.ACTION_LIKE, item)" class="ion-activatable ripple-parent circle">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      <ion-icon name="thumbs-up-sharp"></ion-icon>
+                    </div>
+                    <ion-label>10K</ion-label>
+        
+                    <div (click)="handleTap(InteractionType.ACTION_DISLIKE, item)" class="ion-activatable ripple-parent circle">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      <ion-icon name="thumbs-down-sharp"></ion-icon>
+                    </div>
+                    <ion-label>Dislike</ion-label>
+        
+                    <div (click)="handleTap(InteractionType.ACTION_COMMENT, item)" class="ion-activatable ripple-parent circle">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      <ion-icon name="chatbox-sharp"></ion-icon>
+                    </div>
+                    <ion-label>532</ion-label>
+        
+                    <div (click)="handleTap(InteractionType.ACTION_BOOKMARK, item)" class="ion-activatable ripple-parent circle">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      <ion-icon name="bookmark"></ion-icon>
+                    </div>
+                    <ion-label>Save</ion-label>
+                  }
   
-      </swiper-slide>
-    }
-   
-  </swiper-container>
-</ion-content>
+                  @if (showOptions) {
+                    <div (click)="handleTap(InteractionType.ACTION_REPORT, item)" class="ion-activatable ripple-parent circle">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      <ion-icon name="alert-circle"></ion-icon>
+                    </div>
+                    <ion-label>Report</ion-label>
+  
+                    <div (click)="handleTap(InteractionType.ACTION_SHARE, item)" class="ion-activatable ripple-parent circle">
+                      <ion-ripple-effect></ion-ripple-effect>
+                      <ion-icon name="share-social-sharp"></ion-icon>
+                    </div>
+                    <ion-label>Share</ion-label>
+                  }
+      
+                  <div (click)="handleTap(InteractionType.ACTION_OPTIONS, item)" class="ion-activatable ripple-parent circle">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-icon name="ellipsis-horizontal-sharp"></ion-icon>
+                  </div>
+      
+                  <img class="image_domain" alt=""
+                    src="https://ionicframework.com/docs/img/demos/avatar.svg">
+      
+                </ion-col>
+              </ion-row>
+            </ion-row>
+          </ion-grid>
+    
+        </swiper-slide>
+      }
+     
+    </swiper-container>
+  </ion-content>
+}
+
